@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ParadigmShift Architecture Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="logo-text">Elearning</h1>
+            </div>
+            <div class="menu-group" style="display: flex; flex-direction: column; gap: 1rem;">
+                <details class="nav-details" open>
+                    <summary>Modules</summary>
+                    <ul class="nav-links">
+                        <li><button class="nav-btn active" data-target="module-1">Module 1: Middleware &amp; Integration</button></li>
+                        <li><button class="nav-btn" data-target="module-2">Module 2: Testing Critical Issues</button></li>
+                        <li><button class="nav-btn" data-target="module-3">Module 3: Governance System</button></li>
+                        <li><button class="nav-btn" data-target="module-summary">Quick Summary</button></li>
+                    </ul>
+                </details>
+                <details class="nav-details" open>
+                    <summary>Architecture Comparison</summary>
+                    <ul class="nav-links">
+                        <li><button class="nav-btn">Monolithic</button></li>
+                        <li><button class="nav-btn">Service-Oriented Architecture (SOA)</button></li>
+                        <li><button class="nav-btn active">Microservices</button></li>
+                        <li><button class="nav-btn">Serverless</button></li>
+                    </ul>
+                </details>
+            </div>
+        </nav>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <button id="sidebar-toggle" style="background: var(--bg-darker); border: 1px solid var(--panel-border); color: var(--text-main); padding: 0.5rem 1rem; border-radius: var(--radius-sm); cursor: pointer; margin-bottom: 2rem; font-family: var(--font-body); display: flex; align-items: center; gap: 0.5rem; transition: background 0.2s;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                Toggle Sidebar
+            </button>
+            
+            <!-- Module 1 -->
+            <section id="module-1" class="module-section new-layout active-section">
+                <div class="section-header">
+                    <h2>Middleware – Concepts &amp; Integration Strategies</h2>
+                    <p>Module 1 (Chapter 4) - The "bridge" connecting different systems.</p>
+                </div>
+                
+                <div class="bento-grid-12">
+                    <div class="bento-card-inner col-span-7">
+                        <div class="card-header border-bottom">
+                            <h3>What is Middleware?</h3>
+                        </div>
+                        <p>Middleware is software that sits <strong>between</strong> different applications, operating systems, and databases, acting as a <strong>bridge</strong> so they can communicate even if they're built on different technologies.</p>
+                        
+                        <div class="bento-card-inner border-primary" style="margin-top: 1.5rem;">
+                            <span class="badge-sub">💡 Simple Explanation</span>
+                            <h4>Plumbing &amp; Translation</h4>
+                            <p>Think of middleware like a <strong>translator at the United Nations</strong> — it lets a Java app and a Python app "understand" each other. It is the "plumbing" of a system — you don't see it, but without it, none of the apps could talk to each other or stay secure and consistent.</p>
+                        </div>
+                    </div>
+
+                    <div class="bento-card-inner col-span-5">
+                        <div class="card-header border-bottom">
+                            <h3>Why Middleware Matters</h3>
+                        </div>
+                        <ul class="forensic-list">
+                            <li><strong>Interoperability</strong> Connects heterogeneous systems.</li>
+                            <li><strong>Abstraction</strong> Hides messy network/hardware details.</li>
+                            <li><strong>Scalability &amp; Load Balancing</strong> Spreads requests across servers.</li>
+                            <li><strong>Data Consistency</strong> Ensures multi-step transactions complete safely.</li>
+                            <li><strong>Distributed Systems Support</strong> Gives "location transparency".</li>
+                        </ul>
+                    </div>
+
+                    <div class="bento-card-inner col-span-6">
+                        <div class="card-header border-bottom">
+                            <h3>Framework vs Platform</h3>
+                        </div>
+                        <ul class="forensic-list">
+                            <li><strong>Framework</strong> A box of Lego bricks + instructions (e.g., Spring Boot, Express.js). You build your own logic.</li>
+                            <li><strong>Platform</strong> A pre-built factory (e.g., Apache Kafka). Works out-of-the-box.</li>
+                        </ul>
+                        
+                        <div class="card-header border-bottom" style="margin-top: 2rem;">
+                            <h3>Types of Middleware</h3>
+                        </div>
+                        <ul class="forensic-list">
+                            <li><strong>MOM</strong> Message-Oriented for async systems.</li>
+                            <li><strong>RPC</strong> Remote Procedure Call.</li>
+                            <li><strong>Database</strong> Connects apps to DBs.</li>
+                            <li><strong>Web</strong> Links web servers, apps, DBs.</li>
+                            <li><strong>ORB</strong> Object Request Broker.</li>
+                            <li><strong>API Gateway</strong> Single entry point managing traffic.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bento-card-inner col-span-6">
+                        <div class="card-header border-bottom">
+                            <h3>Common Platforms &amp; Examples</h3>
+                        </div>
+                        <ul class="forensic-list">
+                            <li><strong>ESB</strong> Centralized router for internal systems.</li>
+                            <li><strong>Message brokers</strong> Move messages between systems.</li>
+                            <li><strong>Apache Kafka</strong> Stores event streams (e.g., Netflix).</li>
+                            <li><strong>RabbitMQ</strong> Like a post office for messages.</li>
+                            <li><strong>IBM WebSphere</strong> Enterprise app server.</li>
+                            <li><strong>Oracle Fusion</strong> Full suite for large enterprises.</li>
+                            <li><strong>Microsoft .NET</strong> Request pipeline in ASP.NET Core.</li>
+                        </ul>
+                        
+                        <div class="card-header border-bottom" style="margin-top: 2rem;">
+                            <h3>Benefits of Integration</h3>
+                        </div>
+                        <ul class="forensic-list">
+                            <li>Improves interoperability (old/new systems).</li>
+                            <li>Enables real-time communication (e.g., Grab).</li>
+                            <li>Supports scalability during traffic spikes.</li>
+                            <li>Reduces complexity (avoids spaghetti).</li>
+                        </ul>
+                    </div>
+
+                    <div class="bento-card-inner col-span-12">
+                        <div class="card-header border-bottom">
+                            <h3>Core Functions of Middleware</h3>
+                        </div>
+                        <div class="table-container">
+                            <table class="arch-table">
+                                <thead>
+                                    <tr>
+                                        <th>Function</th>
+                                        <th>What it Does</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Communication management</strong></td>
+                                        <td>Hides protocols (TCP/IP, HTTP); supports sync &amp; async messaging</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Data transformation &amp; routing</strong></td>
+                                        <td>Converts formats (XML↔JSON), maps schemas, routes messages</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Security &amp; authentication</strong></td>
+                                        <td>OAuth, JWT, encryption (SSL/TLS), audit logging</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Transaction management</strong></td>
+                                        <td>ACID — Atomicity, Consistency, Isolation, Durability</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Service coordination</strong></td>
+                                        <td>Orchestration, choreography, load balancing, service discovery</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="bento-card-inner col-span-12">
+                        <div class="card-header border-bottom">
+                            <h3>Integration Strategies (Important!)</h3>
+                        </div>
+                        <div class="bento-card-inner border-primary" style="margin-bottom: 1.5rem;">
+                            <span class="badge-sub">💡 Simple Explanation</span>
+                            <h4>Evolving Traffic Systems</h4>
+                            <p>Think of integration strategies as evolving traffic systems — point-to-point is everyone driving directly to everyone else (chaos), SOA is one central traffic hub (efficient but risky if it fails), microservices are small independent neighborhoods, and API-based integration is like a security checkpoint controlling who goes where.</p>
+                        </div>
+                        <div class="table-container">
+                            <table class="arch-table">
+                                <thead>
+                                    <tr>
+                                        <th>Strategy</th>
+                                        <th>How it Works</th>
+                                        <th>Pros</th>
+                                        <th>Cons</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Point-to-Point</strong></td>
+                                        <td>Systems connect directly with custom code</td>
+                                        <td>Fast, cheap for few systems</td>
+                                        <td>Becomes "spaghetti architecture"</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>SOA (via ESB)</strong></td>
+                                        <td>All systems connect to one central ESB</td>
+                                        <td>Reusable, standardized</td>
+                                        <td>ESB = single point of failure</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Microservices</strong></td>
+                                        <td>App broken into small independent services</td>
+                                        <td>Scalable, resilient</td>
+                                        <td>Complex to monitor/secure</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>API-Based</strong></td>
+                                        <td>Systems expose functions via APIs Gateway</td>
+                                        <td>Secure, central control</td>
+                                        <td>Needs strict API governance</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Module 2 -->
+            <section id="module-2" class="module-section new-layout">
+                <div class="section-header">
+                    <h2>Testing Critical IT Issues &amp; Performance</h2>
+                    <p>Module 2 (Chapter 6) - Identify critical issues and use the right tools.</p>
+                </div>
+                
+                <div class="bento-grid-12">
+                    <div class="bento-card-inner col-span-6">
+                        <div class="card-header border-bottom">
+                            <h3>Why Testing Matters</h3>
+                        </div>
+                        <p>Testing makes sure IT systems work correctly under different conditions. It catches failures, security weaknesses, and slow performance <strong>before</strong> they cause real damage, and supports ongoing improvement after launch.</p>
+                        
+                        <div class="bento-card-inner border-primary" style="margin-top: 1.5rem;">
+                            <span class="badge-sub">💡 Simple Explanation</span>
+                            <h4>The Safety Check</h4>
+                            <p>Just like a car needs a safety check before it's sold, an IT system needs testing before it's deployed — otherwise, one broken part can crash the whole system.</p>
+                        </div>
+                    </div>
+
+                    <div class="bento-card-inner col-span-6">
+                        <div class="card-header border-bottom">
+                            <h3>6.1 Identifying Critical Issues</h3>
+                        </div>
+                        <p>Critical issues are problems serious enough to cause downtime, security breaches, or data loss.</p>
+                        <ul class="forensic-list" style="margin-top: 1rem;">
+                            <li><strong>Performance bottlenecks</strong> Slow queries, network lag.</li>
+                            <li><strong>Scalability limits</strong> System crashes when traffic exceeds capacity.</li>
+                            <li><strong class="text-error">Security vulnerabilities</strong> Weak passwords, SQL injection.</li>
+                            <li><strong>Database failures</strong> and network latency.</li>
+                            <li><strong>Integration bugs</strong> Data loss between systems.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bento-card-inner col-span-12">
+                        <div class="card-header border-bottom">
+                            <h3>Methods for Identifying Critical Issues</h3>
+                        </div>
+                        <div class="bento-card-inner border-primary" style="margin-bottom: 1.5rem;">
+                            <span class="badge-sub">💡 Simple Explanation</span>
+                            <h4>Diagnosis</h4>
+                            <p>This is like a doctor using both machines (monitoring) and patient symptoms (user reports) to diagnose a problem — data alone isn't enough.</p>
+                        </div>
+                        <div class="table-container">
+                            <table class="arch-table">
+                                <thead>
+                                    <tr>
+                                        <th>Method</th>
+                                        <th>Purpose</th>
+                                        <th>Example Tools</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>System monitoring &amp; log analysis</strong></td>
+                                        <td>Tracks live health + reviews past events</td>
+                                        <td>Prometheus, Grafana, ELK Stack</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Risk assessment</strong></td>
+                                        <td>Identifies &amp; prioritizes threats before they happen</td>
+                                        <td>—</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Incident &amp; user reports</strong></td>
+                                        <td>Captures human/qualitative feedback</td>
+                                        <td>Bug reports, complaints</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Performance benchmarking</strong></td>
+                                        <td>Compares system against a baseline</td>
+                                        <td>—</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Security vulnerability scanning</strong></td>
+                                        <td>Finds weaknesses before attackers do</td>
+                                        <td>Nessus, OpenVAS, OWASP ZAP</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="bento-card-inner col-span-12">
+                        <div class="card-header border-bottom">
+                            <h3>6.2 Testing Frameworks and Tools</h3>
+                        </div>
+                        <div class="table-container">
+                            <table class="arch-table">
+                                <thead>
+                                    <tr>
+                                        <th>Testing Type</th>
+                                        <th>Purpose</th>
+                                        <th>Example Tools</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Integration &amp; API Testing</strong></td>
+                                        <td>Checks modules/middleware communicate correctly</td>
+                                        <td>Postman, SoapUI</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Load &amp; Performance Testing</strong></td>
+                                        <td>Simulates many users to find breaking points</td>
+                                        <td>Apache JMeter, LoadRunner</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Security Testing (DAST/SAST)</strong></td>
+                                        <td>Scans for code/network vulnerabilities</td>
+                                        <td>OWASP ZAP, SonarQube</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Chaos Engineering</strong></td>
+                                        <td>Deliberately breaks things to test backups</td>
+                                        <td>Chaos Monkey</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem;">
+                            <div>
+                                <h4 style="color: #fff; margin-bottom: 0.5rem; font-family: var(--font-heading);">Other Frameworks</h4>
+                                <ul class="forensic-list">
+                                    <li>Selenium (web), JUnit (Java), TestNG.</li>
+                                    <li>Cypress (modern web apps), PyTest (Python).</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 style="color: #fff; margin-bottom: 0.5rem; font-family: var(--font-heading);">Types of Performance Testing</h4>
+                                <ul class="forensic-list">
+                                    <li><strong>Load testing</strong> Normal expected traffic.</li>
+                                    <li><strong>Stress testing</strong> Pushes beyond limits.</li>
+                                    <li><strong>Scalability testing</strong> Checks growth capability.</li>
+                                    <li><strong>Endurance testing</strong> Checks stability over a long time.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bento-card-inner col-span-12">
+                        <div class="card-header border-bottom">
+                            <h3>6.3 Analyzing Testing Results</h3>
+                        </div>
+                        <div class="bento-card-inner border-primary" style="margin-bottom: 1.5rem;">
+                            <span class="badge-sub">💡 Simple Explanation</span>
+                            <h4>Vital Signs</h4>
+                            <p>A system might look fast (response time) but still be unreliable (high errors) — that's why architects check all five metrics together, like checking a patient's full vital signs instead of just one.</p>
+                        </div>
+                        <div class="table-container">
+                            <table class="arch-table">
+                                <thead>
+                                    <tr>
+                                        <th>Metric</th>
+                                        <th>Meaning</th>
+                                        <th>Represents</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Response time</strong></td>
+                                        <td>Time from request to response</td>
+                                        <td>Speed</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Throughput</strong></td>
+                                        <td>Requests handled per second</td>
+                                        <td>Capacity</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Error rate</strong></td>
+                                        <td>% of failed requests</td>
+                                        <td>Reliability</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>CPU/Memory usage</strong></td>
+                                        <td>Resource load (>80–90% = bottleneck risk)</td>
+                                        <td>Efficiency</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>UX indicators</strong></td>
+                                        <td>Real user perception of performance</td>
+                                        <td>Satisfaction</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Module 3 -->
+            <section id="module-3" class="module-section new-layout">
+                <div class="section-header">
+                    <h2>Governance &amp; Administrative Policies</h2>
+                    <p>Module 3 (Chapter 8) - Ensuring technology supports business goals.</p>
+                </div>
+                
+                <div class="bento-grid-12">
+                    <div class="bento-card-inner col-span-6">
+                        <div class="card-header border-bottom">
+                            <h3>What is IT Governance?</h3>
+                        </div>
+                        <p>IT Governance is the <strong>steering mechanism</strong> that controls how an organization's IT systems align with its strategic goals, manage risk, and create value — while staying resilient. Importantly, the people governing the system are <strong>inside</strong> the system, not outside watching it.</p>
+                        
+                        <div class="bento-card-inner border-primary" style="margin-top: 1.5rem;">
+                            <span class="badge-sub">💡 Simple Explanation</span>
+                            <h4>The Government &amp; Rulebooks</h4>
+                            <p>IT governance is like a country's government — it sets the laws (policies), uses agencies/frameworks (COBIT, ITIL) to enforce them, and constantly monitors whether things are working to keep the whole "nation" running smoothly.</p>
+                        </div>
+                    </div>
+
+                    <div class="bento-card-inner col-span-6">
+                        <div class="card-header border-bottom">
+                            <h3>Why IT Governance Matters</h3>
+                        </div>
+                        <ul class="forensic-list">
+                            <li><strong>Strategic Alignment</strong> Ensures every IT dollar supports a business goal.</li>
+                            <li><strong>Risk Mitigation</strong> Clear policies for data privacy &amp; recovery.</li>
+                            <li><strong>Resource Optimization</strong> Cuts redundant software/cloud waste.</li>
+                            <li><strong>Regulatory Compliance</strong> Bakes legal requirements into system design.</li>
+                            <li><strong>Performance Measurement</strong> Uses frameworks with KPIs.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bento-card-inner col-span-12">
+                        <div class="card-header border-bottom">
+                            <h3>Key Governance Components</h3>
+                        </div>
+                        <div class="table-container">
+                            <table class="arch-table">
+                                <thead>
+                                    <tr>
+                                        <th>Component</th>
+                                        <th>Role</th>
+                                        <th>Analogy</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Strategic alignment</strong></td>
+                                        <td>IT and business move toward the same goal</td>
+                                        <td>Compass</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Risk management</strong></td>
+                                        <td>Maintains stability against threats</td>
+                                        <td>Immune system</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Resource management</strong></td>
+                                        <td>Distributes assets to where they create value</td>
+                                        <td>Circulatory system</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Performance measurement</strong></td>
+                                        <td>Collects data and feeds it back to leadership</td>
+                                        <td>Sensory system</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="bento-card-inner col-span-12">
+                        <div class="card-header border-bottom">
+                            <h3>IT Governance Frameworks</h3>
+                        </div>
+                        <div class="table-container">
+                            <table class="arch-table">
+                                <thead>
+                                    <tr>
+                                        <th>Framework</th>
+                                        <th>Focus</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>COBIT</strong></td>
+                                        <td>Bridges enterprise strategy and IT execution</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>ITIL</strong></td>
+                                        <td>Manages and delivers IT services (service lifecycle)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>ISO/IEC 38500</strong></td>
+                                        <td>International standard for corporate IT governance</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Balanced Scorecard</strong></td>
+                                        <td>Measures performance across Financial, Customer, Internal Process, Learning &amp; Growth</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="bento-card-inner col-span-6">
+                        <div class="card-header border-bottom">
+                            <h3>8.1 Fundamentals of IT Governance</h3>
+                        </div>
+                        <ul class="forensic-list">
+                            <li><strong>Clear governance structures</strong> Defines boundaries and communication.</li>
+                            <li><strong>Defined responsibilities</strong> Everyone knows inputs/outputs.</li>
+                            <li><strong>Continuous monitoring</strong> The "eyes" of the organization.</li>
+                        </ul>
+                        
+                        <div class="card-header border-bottom" style="margin-top: 2rem;">
+                            <h3>8.2 Developing Administrative Policies</h3>
+                        </div>
+                        <ul class="forensic-list">
+                            <li><strong>1. Identify requirements</strong> Goals, risks, legal obligations.</li>
+                            <li><strong>2. Draft policy</strong> Purpose, scope, rules, penalties.</li>
+                            <li><strong>3. Review and approve</strong> Legal, IT, HR sign-off.</li>
+                            <li><strong>4. Implement and monitor</strong> Train staff, audit compliance.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bento-card-inner col-span-6">
+                        <div class="card-header border-bottom">
+                            <h3>Types of Administrative Policies</h3>
+                        </div>
+                        <ul class="forensic-list">
+                            <li><strong>Security policies</strong> Protect systems from threats.</li>
+                            <li><strong>Access control policies</strong> Define who can access what.</li>
+                            <li><strong>Data management policies</strong> Govern data collection and disposal.</li>
+                        </ul>
+                        
+                        <div class="card-header border-bottom" style="margin-top: 2rem;">
+                            <h3>8.3 Aligning Policies &amp; Future Trends</h3>
+                        </div>
+                        <ul class="forensic-list">
+                            <li>Systems and policies must reflect <strong>business priorities</strong>.</li>
+                            <li><strong>Future Governance Trends:</strong> AI governance, Cloud governance, Stronger cybersecurity regulation.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Summary -->
+            <section id="module-summary" class="module-section new-layout">
+                <div class="section-header">
+                    <h2>Quick Summary</h2>
+                    <p>High-level overview of the cheat sheet.</p>
+                </div>
+                
+                <div class="bento-grid-12">
+                    <div class="bento-card-inner col-span-12">
+                        <div class="table-container">
+                            <table class="arch-table">
+                                <thead>
+                                    <tr>
+                                        <th>Module</th>
+                                        <th>Chapter</th>
+                                        <th>Core Idea</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Module 1</strong></td>
+                                        <td>Ch. 4 – Middleware</td>
+                                        <td>The "bridge" connecting different systems; integration strategies evolve from point-to-point → SOA → microservices → API-based</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Module 2</strong></td>
+                                        <td>Ch. 6 – Testing</td>
+                                        <td>Identify critical issues, use the right testing tools, and analyze results holistically to ensure reliable performance</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Module 3</strong></td>
+                                        <td>Ch. 8 – Governance</td>
+                                        <td>Align IT with business strategy through frameworks (COBIT/ITIL) and structured policy development</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        // Sidebar Toggle Logic
+        const sidebarToggle = document.getElementById('sidebar-toggle');
+        const sidebar = document.querySelector('.sidebar');
+        const mainContent = document.querySelector('.main-content');
+        
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('hidden');
+            mainContent.classList.toggle('expanded');
+        });
+
+        // Navigation Logic
+        document.querySelectorAll('.nav-btn[data-target]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.nav-btn[data-target]').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.module-section').forEach(s => s.classList.remove('active-section'));
+                
+                btn.classList.add('active');
+                const target = btn.getAttribute('data-target');
+                document.getElementById(target).classList.add('active-section');
+                
+                // Auto-close sidebar on mobile after clicking a link
+                if(window.innerWidth <= 1024) {
+                    sidebar.classList.add('hidden');
+                    mainContent.classList.add('expanded');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
