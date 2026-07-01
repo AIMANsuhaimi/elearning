@@ -262,6 +262,52 @@ h1, h2, h3, h4, h5, h6, .logo-text, .section-header h2 {
     font-family: var(--font-heading);
 }
 
+.diagram-canvas {
+    background-color: #030305;
+    background-image: linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+    background-size: 30px 30px;
+    background-position: center center;
+    padding: 3rem 1rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(59, 130, 246, 0.15);
+    overflow-x: auto;
+    text-align: center;
+    box-shadow: inset 0 0 60px rgba(0,0,0,1), 0 0 20px rgba(59, 130, 246, 0.05);
+    margin: 2rem 0;
+    position: relative;
+    animation: pulseGrid 4s ease-in-out infinite alternate;
+}
+
+@keyframes pulseGrid {
+    0% { border-color: rgba(59, 130, 246, 0.1); box-shadow: inset 0 0 60px rgba(0,0,0,1), 0 0 20px rgba(59, 130, 246, 0.02); }
+    100% { border-color: rgba(59, 130, 246, 0.4); box-shadow: inset 0 0 60px rgba(0,0,0,1), 0 0 40px rgba(59, 130, 246, 0.15); }
+}
+
+/* Animated Flow for Mermaid Diagrams */
+.mermaid .edgePath path {
+    stroke-width: 2px !important;
+    stroke-dasharray: 6, 6 !important;
+    animation: dashFlow 0.8s linear infinite !important;
+}
+.mermaid .edgePath .arrowheadPath {
+    stroke-dasharray: none !important;
+    animation: none !important;
+}
+@keyframes dashFlow {
+    from { stroke-dashoffset: 12; }
+    to { stroke-dashoffset: 0; }
+}
+
+/* Hover glow effect for nodes */
+.mermaid .node rect, .mermaid .node circle, .mermaid .node polygon {
+    transition: filter 0.3s ease;
+}
+.mermaid .node:hover rect, .mermaid .node:hover circle, .mermaid .node:hover polygon {
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.6));
+    cursor: pointer;
+}
+
 .text-error { color: var(--accent); }
 .text-primary { color: var(--text-main); } 
 .text-secondary { color: var(--text-muted); }

@@ -6,6 +6,29 @@
     <title>ParadigmShift Architecture Lab</title>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ 
+            startOnLoad: false, 
+            theme: 'base',
+            themeVariables: {
+                background: 'transparent',
+                primaryColor: '#111111',
+                primaryTextColor: '#ffffff',
+                primaryBorderColor: '#444',
+                lineColor: '#666',
+                textColor: '#eee',
+                mainBkg: '#111',
+                nodeBorder: '#333',
+                clusterBkg: '#050505',
+                clusterBorder: '#222',
+                defaultLinkColor: '#555',
+                fontFamily: '"Courier Prime", monospace',
+                fontSize: '15px'
+            }
+        });
+        window.mermaid = mermaid;
+    </script>
 </head>
 <body>
     <div class="app-container">
@@ -27,10 +50,10 @@
                 <details class="nav-details" open>
                     <summary>Architecture Comparison</summary>
                     <ul class="nav-links">
-                        <li><button class="nav-btn">Monolithic</button></li>
-                        <li><button class="nav-btn">Service-Oriented Architecture (SOA)</button></li>
-                        <li><button class="nav-btn active">Microservices</button></li>
-                        <li><button class="nav-btn">Serverless</button></li>
+                        <li><button class="nav-btn" data-target="arch-monolithic">Monolithic</button></li>
+                        <li><button class="nav-btn" data-target="arch-soa">Service-Oriented Architecture (SOA)</button></li>
+                        <li><button class="nav-btn" data-target="arch-microservices">Microservices</button></li>
+                        <li><button class="nav-btn" data-target="arch-serverless">Serverless</button></li>
                     </ul>
                 </details>
             </div>
@@ -595,6 +618,243 @@
                 </div>
             </section>
 
+            <!-- ARCHITECTURE COMPARISONS -->
+
+            <!-- Monolithic -->
+            <section id="arch-monolithic" class="module-section new-layout">
+                <div class="section-header">
+                    <h2>Monolithic Architecture</h2>
+                    <p>The traditional "all-in-one" approach to building software.</p>
+                </div>
+                
+                <div class="bento-grid-12">
+                    <div class="bento-card-inner col-span-7">
+                        <div class="card-header border-bottom">
+                            <h3>Scenario: ShopEZ Single Order Flow</h3>
+                        </div>
+                        <div class="bento-card-inner border-primary" style="margin-bottom: 1.5rem;">
+                            <span class="badge-sub">🛒 The Process</span>
+                            <p>1. User clicks "Buy" on ShopEZ<br>2. App calls internal <code style="color:var(--primary);">checkInventory()</code> function <br>3. App calls internal <code style="color:var(--primary);">processPayment()</code> function <br>4. App saves to a single shared database.</p>
+                        </div>
+                        <p>In a monolith, the entire ShopEZ store is compiled into a single massive block of code. Every component runs in the same server memory space.</p>
+                    </div>
+
+                    <div class="bento-card-inner col-span-5">
+                        <div class="card-header border-bottom">
+                            <h3>The Issue</h3>
+                        </div>
+                        <ul class="forensic-list">
+                            <li><strong class="text-error">Tight Coupling:</strong> If the payment function crashes, it crashes the entire server, taking down the storefront too.</li>
+                            <li><strong class="text-error">Scaling Bottleneck:</strong> If millions of people are browsing (but not buying), you still have to scale the payment processing logic because it's bundled together.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bento-card-inner col-span-12">
+                        <div class="card-header border-bottom">
+                            <h3>Architecture Diagram</h3>
+                        </div>
+                        <div class="diagram-canvas">
+                            <div class="mermaid">
+                            flowchart LR
+                                classDef default fill:#111,stroke:#333,stroke-width:1px,color:#eee;
+                                classDef user fill:#1a1a1a,stroke:#555,stroke-width:2px,color:#fff;
+                                classDef danger fill:#3f0f0f,stroke:#ef4444,stroke-width:2px,color:#fca5a5;
+                                
+                                U((User)):::user --> |HTTP| Web[ShopEZ Web]
+                                subgraph Monolith [Monolithic Application]
+                                    Web --> O[Order Logic]:::danger
+                                    O --> |Direct Blocking Call| I[Inventory Logic]
+                                    O --> |Direct Blocking Call| P[Payment Logic]:::danger
+                                end
+                                I --> DB[(Shared DB)]
+                                P --> DB
+                            </div>
+                        </div>
+                        <p style="margin-top: 1rem; font-size: 0.85rem;"><em>Notice there is NO queue. The Order Logic is frozen (blocked) waiting for the Payment Logic to finish.</em></p>
+                    </div>
+
+                    <div class="bento-card-inner col-span-12">
+                        <div class="card-header border-bottom">
+                            <h3>How Middleware Can Solve This</h3>
+                        </div>
+                        <p>To fix a struggling monolith, architects introduce <strong>Message-Oriented Middleware (MOM)</strong> (like RabbitMQ or Kafka) to break it apart. Instead of the ShopEZ storefront directly processing the payment, it drops an "Order Received" message into the middleware queue and immediately returns a "Success" to the user. A separate background worker picks up the message and processes the payment safely.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SOA -->
+            <section id="arch-soa" class="module-section new-layout">
+                <div class="section-header">
+                    <h2>Service-Oriented Architecture (SOA)</h2>
+                    <p>The enterprise approach to decoupled services.</p>
+                </div>
+                
+                <div class="bento-grid-12">
+                    <div class="bento-card-inner col-span-7">
+                        <div class="card-header border-bottom">
+                            <h3>Scenario: ShopEZ Single Order Flow</h3>
+                        </div>
+                        <div class="bento-card-inner border-primary" style="margin-bottom: 1.5rem;">
+                            <span class="badge-sub">🛒 The Process</span>
+                            <p>1. User clicks "Buy" on the ShopEZ Storefront Service.<br>2. Storefront sends XML message to the <strong>Enterprise Service Bus (ESB)</strong>.<br>3. ESB translates and routes the message to Inventory Service.<br>4. ESB routes to Payment Service.</p>
+                        </div>
+                        <p>The system is broken into large enterprise services (e.g., an entire CRM, an entire Billing system). They do not talk to each other directly.</p>
+                    </div>
+
+                    <div class="bento-card-inner col-span-5">
+                        <div class="card-header border-bottom">
+                            <h3>The Issue</h3>
+                        </div>
+                        <ul class="forensic-list">
+                            <li><strong class="text-error">The ESB Bottleneck:</strong> Because EVERY message in the entire company must pass through the central ESB, the middleware itself becomes a massive traffic jam and single point of failure.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bento-card-inner col-span-12">
+                        <div class="card-header border-bottom">
+                            <h3>Architecture Diagram (The Traffic Hub)</h3>
+                        </div>
+                        <div class="diagram-canvas">
+                            <div class="mermaid">
+                            flowchart LR
+                                classDef default fill:#111,stroke:#333,stroke-width:1px,color:#eee;
+                                classDef user fill:#1a1a1a,stroke:#555,stroke-width:2px,color:#fff;
+                                classDef esb fill:#0f172a,stroke:#3b82f6,stroke-width:2px,color:#93c5fd;
+                                
+                                U((User)):::user --> S[ShopEZ Storefront]
+                                S --> |XML Request| ESB{Enterprise Service Bus}:::esb
+                                ESB --> |Routes Data| I[Inventory Service]
+                                ESB --> |Routes Data| P[Payment Service]
+                            </div>
+                        </div>
+                        <p style="margin-top: 1rem; font-size: 0.85rem;"><em>The ESB is the queue/hub. All data sits in line at the ESB waiting to be translated and routed to the next heavy service.</em></p>
+                    </div>
+
+                    <div class="bento-card-inner col-span-12">
+                        <div class="card-header border-bottom">
+                            <h3>The Middleware Solution</h3>
+                        </div>
+                        <p>In SOA, the <strong>Enterprise Service Bus (ESB)</strong> IS the middleware. It solves the "Spaghetti Architecture" of point-to-point connections by acting as a universal translator (converting data formats like XML to JSON) and central router. If the Payment Service is replaced with a new vendor, the Storefront Service doesn't need to be rewritten — only the ESB routing rule is updated.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Microservices -->
+            <section id="arch-microservices" class="module-section new-layout">
+                <div class="section-header">
+                    <h2>Microservices Architecture</h2>
+                    <p>Decentralized, independently deployable services.</p>
+                </div>
+                
+                <div class="bento-grid-12">
+                    <div class="bento-card-inner col-span-7">
+                        <div class="card-header border-bottom">
+                            <h3>Scenario: ShopEZ Single Order Flow</h3>
+                        </div>
+                        <div class="bento-card-inner border-primary" style="margin-bottom: 1.5rem;">
+                            <span class="badge-sub">🛒 The Process</span>
+                            <p>1. User clicks "Buy" via the <strong>ShopEZ API Gateway</strong>.<br>2. Gateway routes to lightweight Order Microservice.<br>3. Order service publishes an "OrderCreated" event to <strong>Apache Kafka (Event Broker)</strong>.<br>4. Payment Microservice and Shipping Microservice independently read that event and do their jobs.</p>
+                        </div>
+                        <p>Services are tiny, own their own separate databases, and use lightweight "dumb pipes" (like Kafka) instead of "smart pipes" (like an ESB) to communicate.</p>
+                    </div>
+
+                    <div class="bento-card-inner col-span-5">
+                        <div class="card-header border-bottom">
+                            <h3>The Issue</h3>
+                        </div>
+                        <ul class="forensic-list">
+                            <li><strong class="text-error">Distributed Complexity:</strong> Data consistency is hard. If the payment fails but inventory was already reduced, you have to write complex "Saga" patterns to reverse the inventory change.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bento-card-inner col-span-12">
+                        <div class="card-header border-bottom">
+                            <h3>Architecture Diagram (The Asynchronous Queue)</h3>
+                        </div>
+                        <div class="diagram-canvas">
+                            <div class="mermaid">
+                            flowchart LR
+                                classDef default fill:#111,stroke:#333,stroke-width:1px,color:#eee;
+                                classDef user fill:#1a1a1a,stroke:#555,stroke-width:2px,color:#fff;
+                                classDef queue fill:#022c22,stroke:#10b981,stroke-width:2px,color:#6ee7b7;
+                                
+                                U((User)):::user --> API[API Gateway]
+                                API --> O[Order Microservice]
+                                O --> |Publishes 'OrderCreated'| Q[(Kafka / RabbitMQ Queue)]:::queue
+                                Q --> |Data waits in line| P[Payment Microservice]
+                                Q --> |Data waits in line| S[Shipping Microservice]
+                            </div>
+                        </div>
+                        <p style="margin-top: 1rem; font-size: 0.85rem;"><em>This is where data queues up! If the Payment service crashes, the 'OrderCreated' data sits safely in the Queue until the service comes back online. No data is lost.</em></p>
+                    </div>
+
+                    <div class="bento-card-inner col-span-12">
+                        <div class="card-header border-bottom">
+                            <h3>How Middleware Solves This</h3>
+                        </div>
+                        <p>Microservices rely heavily on two pieces of modern middleware: <br><br><strong>1. API Gateway:</strong> Acts as a security checkpoint and load balancer. It hides the hundreds of microservices from the user, presenting a single clean API.<br><strong>2. Event Brokers (Kafka/RabbitMQ):</strong> They provide <em>Asynchronous Resilience</em>. If the Payment Microservice crashes, the order isn't lost. The "OrderCreated" message sits safely inside Kafka. When the Payment service reboots, it reads the message and processes the payment as if nothing happened.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Serverless -->
+            <section id="arch-serverless" class="module-section new-layout">
+                <div class="section-header">
+                    <h2>Serverless Architecture</h2>
+                    <p>Code that only runs when triggered by an event.</p>
+                </div>
+                
+                <div class="bento-grid-12">
+                    <div class="bento-card-inner col-span-7">
+                        <div class="card-header border-bottom">
+                            <h3>Scenario: ShopEZ Single Order Flow</h3>
+                        </div>
+                        <div class="bento-card-inner border-primary" style="margin-bottom: 1.5rem;">
+                            <span class="badge-sub">🛒 The Process</span>
+                            <p>1. User clicks "Buy", hitting ShopEZ's AWS API Gateway.<br>2. API Gateway instantly spins up a `ProcessOrder` Lambda function.<br>3. The function saves to DynamoDB and drops a message into an AWS SQS Queue.<br>4. The Queue triggers a `Payment` Lambda function to wake up and process it.</p>
+                        </div>
+                        <p>There are no servers running 24/7. Code executes on-demand and charges by the millisecond.</p>
+                    </div>
+
+                    <div class="bento-card-inner col-span-5">
+                        <div class="card-header border-bottom">
+                            <h3>The Issue</h3>
+                        </div>
+                        <ul class="forensic-list">
+                            <li><strong class="text-error">Cold Starts:</strong> If a function hasn't run in a while, the cloud provider takes a few seconds to boot it up, causing lag for the user.</li>
+                            <li><strong class="text-error">Vendor Lock-in:</strong> You are entirely dependent on cloud-provider-specific middleware to glue your functions together.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bento-card-inner col-span-12">
+                        <div class="card-header border-bottom">
+                            <h3>Architecture Diagram (Cloud Queues)</h3>
+                        </div>
+                        <div class="diagram-canvas">
+                            <div class="mermaid">
+                            flowchart LR
+                                classDef default fill:#111,stroke:#333,stroke-width:1px,color:#eee;
+                                classDef user fill:#1a1a1a,stroke:#555,stroke-width:2px,color:#fff;
+                                classDef aws fill:#451a03,stroke:#f59e0b,stroke-width:2px,color:#fcd34d;
+                                
+                                U((User)):::user --> API[AWS API Gateway]
+                                API --> F1(Lambda: Process Order)
+                                F1 --> |Pushes Event Data| SQS{{AWS SQS / EventBridge}}:::aws
+                                SQS --> |Triggers Wake Up| F2(Lambda: Payment)
+                            </div>
+                        </div>
+                        <p style="margin-top: 1rem; font-size: 0.85rem;"><em>The queue (SQS) acts as the shock absorber. Data lines up in the queue, which automatically scales up the required number of Lambda functions to process them concurrently.</em></p>
+                    </div>
+
+                    <div class="bento-card-inner col-span-12">
+                        <div class="card-header border-bottom">
+                            <h3>The Middleware Reality</h3>
+                        </div>
+                        <p>In Serverless, <strong>the cloud provider IS the middleware</strong>. Developers don't install or manage Kafka or Nginx; they use fully managed services (like AWS EventBridge, SQS, or SNS) to route data between functions. The middleware handles 100% of the scaling, load balancing, and networking, allowing developers to focus purely on business logic.</p>
+                    </div>
+                </div>
+            </section>
+
         </main>
     </div>
 
@@ -618,6 +878,17 @@
                 btn.classList.add('active');
                 const target = btn.getAttribute('data-target');
                 document.getElementById(target).classList.add('active-section');
+                
+                // Re-render mermaid graphs if they were hidden when initialized
+                if(window.mermaid) {
+                    try {
+                        const activeSection = document.getElementById(target);
+                        const mermaids = activeSection.querySelectorAll('.mermaid');
+                        if (mermaids.length > 0) {
+                            window.mermaid.run({ nodes: mermaids });
+                        }
+                    } catch(e) { console.error(e); }
+                }
                 
                 // Auto-close sidebar on mobile after clicking a link
                 if(window.innerWidth <= 1024) {
