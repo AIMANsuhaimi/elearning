@@ -38,10 +38,10 @@
                 <h1 class="logo-text">Elearning</h1>
             </div>
             <div class="menu-group" style="display: flex; flex-direction: column; gap: 1rem;">
-                <details class="nav-details main-menu" open>
+                <details class="nav-details main-menu">
                     <summary style="font-size: 0.9rem; color: #fff; border-bottom: 1px solid var(--panel-border); padding-bottom: 0.5rem; margin-top: 0.5rem;">1. System Paradigm</summary>
                     <div style="padding-left: 1rem; border-left: 1px solid #333; margin-left: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem; padding-bottom: 1rem;">
-                        <details class="nav-details" open>
+                        <details class="nav-details">
                             <summary style="margin-top: 0.5rem;">Modules</summary>
                             <ul class="nav-links">
                                 <li><button class="nav-btn active" data-target="module-1">Module 1: Middleware &amp; Integration</button></li>
@@ -50,7 +50,7 @@
                                 <li><button class="nav-btn" data-target="module-summary">Quick Summary</button></li>
                             </ul>
                         </details>
-                        <details class="nav-details" open>
+                        <details class="nav-details">
                             <summary style="margin-top: 0.5rem;">Architecture Comparison</summary>
                             <ul class="nav-links">
                                 <li><button class="nav-btn" data-target="arch-monolithic">Monolithic</button></li>
@@ -66,7 +66,7 @@
                     <summary style="font-size: 0.9rem; color: #fff; border-bottom: 1px solid var(--panel-border); padding-bottom: 0.5rem; margin-top: 0.5rem;">2. Integrated System Technology</summary>
                     <div style="padding-left: 1rem; border-left: 1px solid #333; margin-left: 0.5rem; padding-bottom: 1rem;">
                         <ul class="nav-links" style="margin-top: 0.5rem;">
-                            <li><button class="nav-btn" data-target="coming-soon"><em>Coming soon...</em></button></li>
+                            <li><button class="nav-btn" data-target="ist-subjective">Subjective</button></li>
                         </ul>
                     </div>
                 </details>
@@ -75,7 +75,12 @@
                     <summary style="font-size: 0.9rem; color: #fff; border-bottom: 1px solid var(--panel-border); padding-bottom: 0.5rem; margin-top: 0.5rem;">3. Decision Support System</summary>
                     <div style="padding-left: 1rem; border-left: 1px solid #333; margin-left: 0.5rem; padding-bottom: 1rem;">
                         <ul class="nav-links" style="margin-top: 0.5rem;">
-                            <li><button class="nav-btn" data-target="coming-soon"><em>Coming soon...</em></button></li>
+                            <li><button class="nav-btn" data-target="dss-chapter-8">Chapter 8</button></li>
+                            <li><button class="nav-btn" data-target="dss-chapter-9">Chapter 9</button></li>
+                            <li><button class="nav-btn" data-target="dss-simon-model">Simon Model</button></li>
+                            <li><button class="nav-btn" data-target="dss-influence-diagram">Influence Diagram</button></li>
+                            <li><button class="nav-btn" data-target="dss-decision-tree">Decision Tree &amp; EMV</button></li>
+                            <li><button class="nav-btn" data-target="dss-revision">Quick Revision Checklist</button></li>
                         </ul>
                     </div>
                 </details>
@@ -604,6 +609,470 @@
                         <ul class="forensic-list">
                             <li>Systems and policies must reflect <strong>business priorities</strong>.</li>
                             <li><strong>Future Governance Trends:</strong> AI governance, Cloud governance, Stronger cybersecurity regulation.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Integrated System Technology - Subjective -->
+            <section id="ist-subjective" class="module-section new-layout">
+                <div class="section-header">
+                    <h2>Subjective</h2>
+                    <p>System Design Fundamentals</p>
+                </div>
+                
+                <div class="bento-grid-12">
+                    <!-- Scalability -->
+                    <div class="bento-card-inner col-span-12">
+                        <div class="card-header border-bottom">
+                            <h3>1. Scalability</h3>
+                        </div>
+                        <ul class="forensic-list" style="margin-top: 1rem;">
+                            <li><strong>Vertical Scaling (Scale Up)</strong> — Adding more CPU/RAM to a single server. Simple to implement, but has a physical hardware ceiling, often requires downtime to upgrade, and creates a single point of failure.</li>
+                            <li><strong>Horizontal Scaling (Scale Out)</strong> — Adding more server nodes to a pool. Offers near-infinite scaling potential, built-in redundancy, and lets servers be spun up or down instantly based on demand.</li>
+                            <li><strong>Load Balancing</strong> — Distributes traffic across servers to prevent bottlenecks. At massive scale (10,000+ nodes), systems rely on hyper-scalable algorithms such as:
+                                <ul style="margin-left: 2rem; margin-top: 0.5rem; margin-bottom: 0.5rem;">
+                                    <li><strong>Power-of-d Choices</strong> — Queries a small random subset of servers and picks the best one, avoiding the overhead of checking every node.</li>
+                                    <li><strong>Join-the-Idle-Queue (JIQ)</strong> — Idle servers proactively broadcast their availability, so requests are routed to them directly.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <div class="bento-card-inner border-primary" style="margin-top: 1.5rem;">
+                            <span class="badge-sub">💡 Insight</span>
+                            <h4>How this handles growing demand</h4>
+                            <p>As user/request volume increases, vertical scaling quickly hits a hardware ceiling and can't respond fast enough (it needs downtime to upgrade). Horizontal scaling absorbs growth by adding commodity nodes on demand — but only works well if a load balancer can spread traffic evenly. At very large scale, naive load balancing (checking every server) becomes a bottleneck itself, which is why algorithms like Power-of-d Choices and JIQ exist — they let the system keep making good routing decisions cheaply even as the node count grows into the thousands.</p>
+                        </div>
+                    </div>
+
+                    <!-- Exception Recovery Strategies -->
+                    <div class="bento-card-inner col-span-12">
+                        <div class="card-header border-bottom">
+                            <h3>2. Exception Recovery Strategies</h3>
+                        </div>
+                        <ul class="forensic-list" style="margin-top: 1rem;">
+                            <li><strong>Backward Recovery</strong> — Rolls the system back to a historically correct checkpoint. Best for fixing data corruption and enforcing strict financial consistency, but can be costly if a lot of processing time is lost.</li>
+                            <li><strong>Forward Recovery</strong> — Uses pre-programmed fallback handlers to repair state on the fly and continue without rolling back. Ideal for real-time event streams and high-availability systems.</li>
+                            <li><strong>Self-Healing</strong> — Autonomous fault tolerance mechanisms, including:
+                                <ul style="margin-left: 2rem; margin-top: 0.5rem; margin-bottom: 0.5rem;">
+                                    <li><strong>Micro-reboots</strong> — Restart only the isolated failing component instead of the whole system.</li>
+                                    <li><strong>Dead-Letter Queues (DLQs)</strong> — Safely quarantine broken "poison messages" so the main pipeline can keep processing.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <div class="bento-card-inner border-primary" style="margin-top: 1.5rem;">
+                            <span class="badge-sub">💡 Insight</span>
+                            <h4>When to use which</h4>
+                            <p>Choose <strong>backward recovery</strong> when correctness matters more than speed — e.g. banking transactions, where partially-applied changes must be undone rather than patched. Choose <strong>forward recovery</strong> when uptime matters more than a perfect rollback — e.g. a live video stream or sensor feed, where pausing to roll back would itself be a failure. Choose <strong>self-healing</strong> for distributed, always-on systems where failures are expected and isolated components need to recover (or be discarded) without operator intervention — e.g. cloud microservices or message queues under constant load.</p>
+                        </div>
+                    </div>
+
+                    <!-- Enterprise Architecture Styles -->
+                    <div class="bento-card-inner col-span-12">
+                        <div class="card-header border-bottom">
+                            <h3>3. Enterprise Architecture Styles</h3>
+                        </div>
+                        <ul class="forensic-list" style="margin-top: 1rem;">
+                            <li><strong>Monolithic</strong> — A single large application where all modules are tightly coupled.</li>
+                            <li><strong>Service-Oriented Architecture (SOA)</strong> — Breaks applications into reusable business services, coordinated through an Enterprise Service Bus (ESB).</li>
+                            <li><strong>Microservices</strong> — Small, independent services that own their own codebase and database, communicating via lightweight APIs.</li>
+                            <li><strong>Event-Driven Architecture (EDA)</strong> — Services react to events asynchronously (via brokers like Kafka) instead of calling each other directly, enabling true decoupling.</li>
+                        </ul>
+                        <div style="margin-top: 1.5rem; overflow-x: auto;">
+                            <h4>Comparison — challenges, flexibility, integration, fit for modern ecosystems:</h4>
+                            <table style="width: 100%; border-collapse: collapse; margin-top: 1rem; color: var(--text-main); font-size: 0.9rem;">
+                                <thead>
+                                    <tr style="border-bottom: 1px solid var(--panel-border); background: rgba(255, 255, 255, 0.05);">
+                                        <th style="padding: 0.75rem; text-align: left;">Style</th>
+                                        <th style="padding: 0.75rem; text-align: left;">Flexibility</th>
+                                        <th style="padding: 0.75rem; text-align: left;">Integration</th>
+                                        <th style="padding: 0.75rem; text-align: left;">Main Challenge</th>
+                                        <th style="padding: 0.75rem; text-align: left;">Fit for Modern Digital Ecosystems</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom: 1px solid var(--panel-border);">
+                                        <td style="padding: 0.75rem;">Monolithic</td>
+                                        <td style="padding: 0.75rem;">Low — one codebase, one deploy</td>
+                                        <td style="padding: 0.75rem;">Simple internally, hard externally</td>
+                                        <td style="padding: 0.75rem;">Tight coupling makes changes risky; hard to scale parts independently</td>
+                                        <td style="padding: 0.75rem;">Poor — doesn't suit fast-changing, cloud-native demands</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--panel-border);">
+                                        <td style="padding: 0.75rem;">SOA</td>
+                                        <td style="padding: 0.75rem;">Medium</td>
+                                        <td style="padding: 0.75rem;">Centralized via ESB, good for legacy system integration</td>
+                                        <td style="padding: 0.75rem;">ESB can become a bottleneck / single point of failure</td>
+                                        <td style="padding: 0.75rem;">Moderate — good where legacy integration matters, but heavier than needed for cloud-native apps</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--panel-border);">
+                                        <td style="padding: 0.75rem;">Microservices</td>
+                                        <td style="padding: 0.75rem;">High — each service deployed/scaled independently</td>
+                                        <td style="padding: 0.75rem;">Via lightweight APIs (REST/gRPC), more moving parts to manage</td>
+                                        <td style="padding: 0.75rem;">Operational complexity: monitoring, versioning, distributed data</td>
+                                        <td style="padding: 0.75rem;">Strong — matches cloud, container, and CI/CD-driven environments</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--panel-border);">
+                                        <td style="padding: 0.75rem;">EDA</td>
+                                        <td style="padding: 0.75rem;">Very high — services fully decoupled in time and space</td>
+                                        <td style="padding: 0.75rem;">Via event brokers (e.g. Kafka), no direct service-to-service calls</td>
+                                        <td style="padding: 0.75rem;">Harder to trace/debug event flows; eventual consistency</td>
+                                        <td style="padding: 0.75rem;">Strong — ideal for real-time, high-throughput, reactive systems</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Load Testing Approaches & Virtual Users -->
+                    <div class="bento-card-inner col-span-12">
+                        <div class="card-header border-bottom">
+                            <h3>4. Load Testing Approaches &amp; Virtual Users</h3>
+                        </div>
+                        <ul class="forensic-list" style="margin-top: 1rem;">
+                            <li><strong>Synchronous Bottlenecks</strong> — Traditional systems that make every user wait in a single thread pool crash or bottleneck easily under stress.</li>
+                            <li><strong>Asynchronous Models (Linear Scale-Out)</strong> — Modern load generators use non-blocking I/O:
+                                <ul style="margin-left: 2rem; margin-top: 0.5rem; margin-bottom: 0.5rem;">
+                                    <li><strong>Locust</strong> uses cooperative green threads.</li>
+                                    <li><strong>HULK</strong> uses an event loop.</li>
+                                </ul>
+                                <p style="margin-top: 0.5rem;">Because each node stays "CPU-light" and only yields while waiting on I/O, a single machine can scale virtual users linearly to saturate enterprise-scale targets.</p>
+                            </li>
+                        </ul>
+                        <div class="bento-card-inner border-primary" style="margin-top: 1.5rem;">
+                            <span class="badge-sub">💡 Insight</span>
+                            <h4>Why this matters for resources &amp; scalability</h4>
+                            <p>In synchronous models, each virtual user typically needs its own OS thread, which consumes memory and CPU context-switching overhead even while idle (e.g. waiting on a network response). This caps how many virtual users one machine can simulate — usually a few thousand before the machine itself becomes the bottleneck. Asynchronous models replace threads with lightweight coroutines/green threads or an event loop, so thousands of virtual users can be "in flight" waiting on I/O while consuming almost no CPU. This means resource consumption scales with <em>actual work being done</em>, not with the <em>number of concurrent users</em> — which is what allows a single load-generator node to scale linearly and simulate far larger loads before needing to distribute across a testing cluster.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DSS Chapter 8 -->
+            <section id="dss-chapter-8" class="module-section new-layout">
+                <div class="section-header">
+                    <h2>Chapter 8: DSS Integration &amp; Quality</h2>
+                    <p>Decision Support System (DSS) Revision Notes</p>
+                </div>
+                
+                <div class="bento-grid-12">
+                    <div class="bento-card-inner col-span-6">
+                        <div class="card-header border-bottom">
+                            <h3>The Importance of Integration</h3>
+                        </div>
+                        <p>Integrating a DSS into an organization means the new application is merged in a seamless fashion. This contributes to the user's perception that the system is <strong>easy to use and useful</strong>.</p>
+                        
+                        <div class="card-header border-bottom" style="margin-top: 1.5rem;">
+                            <h3>Two general categories of integration:</h3>
+                        </div>
+                        <ul class="forensic-list">
+                            <li><strong>Functional integration</strong> — the DSS functions are linked to existing systems.</li>
+                            <li><strong>Physical integration</strong> — the hardware and software of the DSS merge with existing infrastructure.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bento-card-inner col-span-6">
+                        <div class="card-header border-bottom">
+                            <h3>Measuring DSS Success</h3>
+                        </div>
+                        <p>A framework with <strong>four measurement categories</strong>:</p>
+                        <ul class="forensic-list">
+                            <li><strong>1. System performance</strong> — response time, data entry, output format, usage, user interface.</li>
+                            <li><strong>2. Task performance</strong> — decision quality, measured by time spent in the decision process; also trust, confidence, and satisfaction.</li>
+                            <li><strong>3. Business opportunities</strong> — costs of development and operation; increased income and changes in productivity.</li>
+                            <li><strong>4. Evolutionary aspects</strong> — degree of flexibility, overall functionality of the DSS.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bento-card-inner col-span-12">
+                        <div class="card-header border-bottom">
+                            <h3>Characteristics of Software Quality</h3>
+                        </div>
+                        <div class="table-container">
+                            <table class="arch-table">
+                                <thead>
+                                    <tr>
+                                        <th>Characteristic</th>
+                                        <th>Meaning</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td><strong>Portability</strong></td><td>Degree of platform independence</td></tr>
+                                    <tr><td><strong>Reliability</strong></td><td>Degree of completeness, accuracy, and consistency</td></tr>
+                                    <tr><td><strong>Efficiency</strong></td><td>Degree of efficiency and accessibility</td></tr>
+                                    <tr><td><strong>Human-engineering</strong></td><td>Degree of communicativeness</td></tr>
+                                    <tr><td><strong>Testability</strong></td><td>Degree of structuredness</td></tr>
+                                    <tr><td><strong>Understandability</strong></td><td>Degree of self-descriptiveness, conciseness, and legibility</td></tr>
+                                    <tr><td><strong>Modifiability</strong></td><td>Degree of augmentability</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DSS Chapter 9 -->
+            <section id="dss-chapter-9" class="module-section new-layout">
+                <div class="section-header">
+                    <h2>Chapter 9: GSS &amp; GDSS</h2>
+                    <p>Group Support Systems and Group Decision Support Systems</p>
+                </div>
+                
+                <div class="bento-grid-12">
+                    <div class="bento-card-inner col-span-6">
+                        <div class="card-header border-bottom">
+                            <h3>GSS Meeting Process — Standard Process</h3>
+                        </div>
+                        <ul class="forensic-list">
+                            <li>Exploratory idea generation</li>
+                            <li>Idea organization tool</li>
+                            <li>Idea prioritization</li>
+                            <li>New idea generation</li>
+                            <li>Selection of final idea</li>
+                        </ul>
+                    </div>
+
+                    <div class="bento-card-inner col-span-6">
+                        <div class="card-header border-bottom">
+                            <h3>GDSS (Group Decision Support System)</h3>
+                        </div>
+                        <p>Common group activities with computer assistance:</p>
+                        <ul class="forensic-list">
+                            <li><strong>Information retrieval</strong></li>
+                            <li><strong>Information sharing</strong> — Parallelism, Anonymity</li>
+                            <li><strong>Information use</strong></li>
+                            <li><strong>Support participants</strong></li>
+                            <li>Improve productivity and effectiveness of meetings</li>
+                            <li>More efficient decision-making</li>
+                            <li>Increase effectiveness of decisions</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DSS Simon Model -->
+            <section id="dss-simon-model" class="module-section new-layout">
+                <div class="section-header">
+                    <h2>Simon Model</h2>
+                    <p>Key Focus Topic - Phases of the decision-making process</p>
+                </div>
+                
+                <div class="bento-grid-12">
+                    <div class="bento-card-inner col-span-6">
+                        <div class="card-header border-bottom">
+                            <h3>The 4 Phases</h3>
+                        </div>
+                        <ul class="forensic-list">
+                            <li><strong>1. Intelligence phase</strong> — initial phase of problem definition in decision making.</li>
+                            <li><strong>2. Design phase</strong> — involves finding possible alternatives in decision making and assessing their contributions.</li>
+                            <li><strong>3. Choice phase</strong> — an alternative is selected.</li>
+                            <li><strong>4. Implementation phase</strong> — putting the recommended solution to work.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bento-card-inner col-span-6">
+                        <div class="card-header border-bottom">
+                            <h3>Flow of the model</h3>
+                        </div>
+                        <div class="diagram-canvas" style="padding: 1rem;">
+                            <div class="mermaid">
+                            flowchart TD
+                                classDef default fill:#111,stroke:#555,stroke-width:1px,color:#eee;
+                                I[Intelligence] --> D[Design]
+                                D --> C[Choice]
+                                C --> IM[Implementation]
+                                IM --> O{Outcome}
+                                
+                                O -->|Success| R[Reality of Situation]
+                                O -->|Failure| I
+                                
+                                D -.->|Model Validation| I
+                                C -.->|Solution Testing| D
+                            </div>
+                        </div>
+                        <ul class="forensic-list" style="margin-top: 1rem;">
+                            <li>If the outcome is a <strong>success</strong>, it confirms the <strong>Reality of Situation</strong>.</li>
+                            <li>If the outcome is a <strong>failure</strong>, the process loops back to the <strong>Intelligence phase</strong>.</li>
+                            <li>Model Validation occurs between Intelligence/Design; Solution Testing occurs between Design/Choice.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DSS Influence Diagram -->
+            <section id="dss-influence-diagram" class="module-section new-layout">
+                <div class="section-header">
+                    <h2>Influence Diagram</h2>
+                    <p>Key Focus Topic - Structuring a Decision Problem</p>
+                </div>
+                
+                <div class="bento-grid-12">
+                    <div class="bento-card-inner col-span-5">
+                        <div class="card-header border-bottom">
+                            <h3>Decision Problem Elements</h3>
+                        </div>
+                        <p>Decision problems include <strong>three types of elements</strong>:</p>
+                        <ul class="forensic-list">
+                            <li><strong>Decisions (Objectives)</strong> — a choice between two or more alternatives.</li>
+                            <li><strong>Uncertain events</strong> — a situation outside the control of the decision maker that could result in two or more possible outcomes.</li>
+                            <li><strong>Alternatives (Choices)</strong> — a criterion for evaluating the desirability of a situation.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bento-card-inner col-span-7">
+                        <div class="card-header border-bottom">
+                            <h3>What is an Influence Diagram?</h3>
+                        </div>
+                        <p>A simple method of graphing the components of a decision and linking them to show the relationship between them.</p>
+                        <ul class="forensic-list">
+                            <li>When properly constructed, it has <strong>no cycles</strong>.</li>
+                            <li>Arrows form a <strong>one-way path</strong>.</li>
+                            <li>There is <strong>no backward path</strong> to the starting point.</li>
+                        </ul>
+                        
+                        <div class="card-header border-bottom" style="margin-top: 1.5rem;">
+                            <h3>Example Influence Diagram</h3>
+                        </div>
+                        <div class="diagram-canvas" style="padding: 1rem;">
+                            <div class="mermaid">
+                            flowchart LR
+                                classDef default fill:#111,stroke:#555,stroke-width:1px,color:#eee;
+                                
+                                Price[Price] --> Demand((Demand))
+                                Weather((Weather)) --> Demand
+                                Demand --> Profit([Profit])
+                                Price --> Profit
+                            </div>
+                        </div>
+                        
+                        <div class="card-header border-bottom" style="margin-top: 1.5rem;">
+                            <h3>Symbols Used</h3>
+                        </div>
+                        <div class="table-container">
+                            <table class="arch-table">
+                                <thead>
+                                    <tr>
+                                        <th>Shape</th>
+                                        <th>Meaning</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td><strong>Rectangle</strong></td><td>Decision variable (objectives)</td></tr>
+                                    <tr><td><strong>Circle</strong></td><td>Uncontrollable or intermediate variable (criteria)</td></tr>
+                                    <tr><td><strong>Oval</strong></td><td>Result / outcome variable — intermediate or final (alternatives)</td></tr>
+                                    <tr><td><strong>Arrow</strong></td><td>Connects variables; indicates the direction of influence (relationship)</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p style="margin-top: 1rem; font-size: 0.85rem;"><em>Influence diagrams are graphical representations of a model, useful for visual communication of a decision problem.</em></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DSS Decision Tree & EMV -->
+            <section id="dss-decision-tree" class="module-section new-layout">
+                <div class="section-header">
+                    <h2>Decision Tree &amp; EMV</h2>
+                    <p>Key Focus Topic - Expected Monetary Value</p>
+                </div>
+                
+                <div class="bento-grid-12">
+                    <div class="bento-card-inner col-span-6">
+                        <div class="card-header border-bottom">
+                            <h3>Example Case: Jenny Lind</h3>
+                        </div>
+                        <p>Jenny Lind is a writer of romance novels. A movie company and a TV network both want exclusive rights to one of her works.</p>
+                        <ul class="forensic-list">
+                            <li>If she signs with the <strong>network</strong>, she receives a <strong>single lump sum</strong> of RM900,000 regardless of outcome.</li>
+                            <li>If she signs with the <strong>movie company</strong>, the payout depends on the market response (box office performance).</li>
+                        </ul>
+                        
+                        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                            <div style="flex: 1;">
+                                <h4>Movie Company Payouts</h4>
+                                <ul class="forensic-list" style="margin-top: 0.5rem; font-size: 0.85rem;">
+                                    <li>Small (0.3): RM200,000</li>
+                                    <li>Medium (0.6): RM1,000,000</li>
+                                    <li>Large (0.1): RM3,000,000</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bento-card-inner col-span-6">
+                        <div class="card-header border-bottom">
+                            <h3>Decision Tree Structure</h3>
+                        </div>
+                        <div class="diagram-canvas" style="padding: 1rem;">
+                            <div class="mermaid">
+                            flowchart LR
+                                classDef default fill:#111,stroke:#555,stroke-width:1px,color:#eee;
+                                
+                                Decision[Contract Decision]
+                                
+                                Decision --> Movie((Movie Co.))
+                                Movie -->|0.3| MSmall>Small Box Office: RM200k]
+                                Movie -->|0.6| MMed>Medium Box Office: RM1M]
+                                Movie -->|0.1| MLarge>Large Box Office: RM3M]
+                                
+                                Decision --> TV((TV Network))
+                                TV -->|0.3| TSmall>Small Box Office: RM900k]
+                                TV -->|0.6| TMed>Medium Box Office: RM900k]
+                                TV -->|0.1| TLarge>Large Box Office: RM900k]
+                            </div>
+                        </div>
+                        <ul class="forensic-list" style="margin-top: 1rem;">
+                            <li><strong>□ (square)</strong> = decision node</li>
+                            <li><strong>○ (circle)</strong> = chance/uncertain event node</li>
+                            <li><strong>◁ (triangle)</strong> = outcome/payout</li>
+                        </ul>
+                    </div>
+
+                    <div class="bento-card-inner col-span-12">
+                        <div class="card-header border-bottom">
+                            <h3>EMV (Expected Monetary Value) Calculation</h3>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                            <div>
+                                <p><strong>EV(Movie Co.):</strong></p>
+                                <pre style="color: #a78bfa; font-family: var(--font-body); background: #1a1a1a; padding: 1rem; border-radius: 8px;">
+EV_movie = 0.3(200,000) + 0.6(1,000,000) + 0.1(3,000,000)
+         = 60,000 + 600,000 + 300,000
+         = RM960,000   ← this is the EVUII / EV Best (highest)</pre>
+                            </div>
+                            <div>
+                                <p><strong>EV(TV Network):</strong></p>
+                                <pre style="color: #94a3b8; font-family: var(--font-body); background: #1a1a1a; padding: 1rem; border-radius: 8px;">
+EV_tv = 0.3(900,000) + 0.6(900,000) + 0.1(900,000)
+      = RM900,000</pre>
+                            </div>
+                        </div>
+                        <div class="bento-card-inner border-primary" style="margin-top: 1.5rem;">
+                            <span class="badge-sub">💡 Conclusion &amp; Key Formula</span>
+                            <p>Since EV_movie (RM960,000) > EV_tv (RM900,000), <strong>Jenny should select the movie contract.</strong></p>
+                            <p style="margin-top: 0.5rem;"><strong>EMV = Σ (Probability of outcome × Payout of outcome)</strong>. Choose the alternative with the <strong>highest EMV</strong>.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DSS Quick Revision Checklist -->
+            <section id="dss-revision" class="module-section new-layout">
+                <div class="section-header">
+                    <h2>Quick Revision Checklist</h2>
+                    <p>Make sure you can check all of these off before the exam.</p>
+                </div>
+                
+                <div class="bento-grid-12">
+                    <div class="bento-card-inner col-span-12">
+                        <ul class="forensic-list" style="font-size: 1.1rem; line-height: 1.8;">
+                            <li><input type="checkbox" style="margin-right: 0.5rem; transform: scale(1.2);"> Know the 4 phases of the <strong>Simon Model</strong> in order (Intelligence → Design → Choice → Implementation)</li>
+                            <li><input type="checkbox" style="margin-right: 0.5rem; transform: scale(1.2);"> Understand feedback loops in the Simon Model (Model Validation, Solution Testing, Success/Failure)</li>
+                            <li><input type="checkbox" style="margin-right: 0.5rem; transform: scale(1.2);"> Know the 3 elements of a decision problem (Decisions, Uncertain events, Alternatives)</li>
+                            <li><input type="checkbox" style="margin-right: 0.5rem; transform: scale(1.2);"> Memorize influence diagram symbols (Rectangle, Circle, Oval, Arrow)</li>
+                            <li><input type="checkbox" style="margin-right: 0.5rem; transform: scale(1.2);"> Practice building a decision tree from a word problem</li>
+                            <li><input type="checkbox" style="margin-right: 0.5rem; transform: scale(1.2);"> Practice calculating <strong>EMV</strong> for each branch/alternative</li>
+                            <li><input type="checkbox" style="margin-right: 0.5rem; transform: scale(1.2);"> Review Chapter 8: integration types, software quality characteristics, DSS success measurement framework</li>
+                            <li><input type="checkbox" style="margin-right: 0.5rem; transform: scale(1.2);"> Review Chapter 9: GSS meeting process, GDSS group activities</li>
                         </ul>
                     </div>
                 </div>
