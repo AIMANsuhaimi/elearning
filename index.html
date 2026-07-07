@@ -67,6 +67,7 @@
                     <div style="padding-left: 1rem; border-left: 1px solid #333; margin-left: 0.5rem; padding-bottom: 1rem;">
                         <ul class="nav-links" style="margin-top: 0.5rem;">
                             <li><button class="nav-btn" data-target="ist-subjective">Subjective</button></li>
+                            <li><button class="nav-btn" data-target="ist-example">Example</button></li>
                         </ul>
                     </div>
                 </details>
@@ -742,6 +743,287 @@
                             <span class="badge-sub">💡 Insight</span>
                             <h4>Why this matters for resources &amp; scalability</h4>
                             <p>In synchronous models, each virtual user typically needs its own OS thread, which consumes memory and CPU context-switching overhead even while idle (e.g. waiting on a network response). This caps how many virtual users one machine can simulate — usually a few thousand before the machine itself becomes the bottleneck. Asynchronous models replace threads with lightweight coroutines/green threads or an event loop, so thousands of virtual users can be "in flight" waiting on I/O while consuming almost no CPU. This means resource consumption scales with <em>actual work being done</em>, not with the <em>number of concurrent users</em> — which is what allows a single load-generator node to scale linearly and simulate far larger loads before needing to distribute across a testing cluster.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            
+            
+            <!-- Integrated System Technology - Example -->
+            <section id="ist-example" class="module-section new-layout">
+                <div class="section-header" style="margin-bottom: 4rem;">
+                    <h2 style="font-size: 3.5rem; letter-spacing: -1px; margin-bottom: 0.5rem; background: linear-gradient(90deg, #fff, #888); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Example Case Studies</h2>
+                    <p style="font-size: 1.2rem; color: var(--primary);">Real-world Software Architecture Scenarios &amp; Solutions</p>
+                </div>
+                
+                <!-- Example 1: Scalability -->
+                <div class="case-study-container" style="margin-bottom: 6rem;">
+                    <div class="bento-grid-12">
+                        <!-- Title and Problem -->
+                        <div class="bento-card-inner col-span-5" style="border-top: 4px solid var(--accent); background: linear-gradient(180deg, rgba(255, 77, 77, 0.05) 0%, transparent 100%);">
+                            <div class="card-header border-bottom">
+                                <span class="badge-sub" style="color: var(--accent); letter-spacing: 1px; font-weight: bold; text-transform: uppercase;">🔥 The Problem Scenario</span>
+                                <h3 style="margin-top: 1rem; font-size: 1.8rem; line-height: 1.3;">Scalability: Black Friday E-Commerce Overload</h3>
+                            </div>
+                            <p style="margin-top: 1rem; font-size: 1.05rem; line-height: 1.6; color: var(--text-main);">
+                                During a major Black Friday event, a distributed e-commerce architecture successfully handled a baseline load of 1,000 concurrent users. However, when traffic spiked to 5,000 concurrent users, the system suffered a catastrophic collapse. Deep diagnostics revealed four complex architectural bottlenecks:
+                            </p>
+                            <ul class="forensic-list" style="margin-top: 1.5rem;">
+                                <li>The load balancer used the traditional "Join the Shortest Queue" (JSQ) algorithm, which created massive communication overhead when querying thousands of nodes, causing the balancer itself to become a severe bottleneck.</li>
+                                <li>A rigid, undersized database connection pool caused synchronous active threads to queue up and time out.</li>
+                                <li>A slow third-party payment gateway caused active threads to block synchronously, initiating a cascading failure that brought down the entire application.</li>
+                                <li>A severe memory leak surfaced, which was completely invisible during normal load but triggered under extreme system stress, crashing active servers.</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- The Solution -->
+                        <div class="bento-card-inner col-span-7" style="border-top: 4px solid var(--primary); background: linear-gradient(180deg, rgba(59, 130, 246, 0.05) 0%, transparent 100%);">
+                            <div class="card-header border-bottom">
+                                <span class="badge-sub" style="color: var(--primary); letter-spacing: 1px; font-weight: bold; text-transform: uppercase;">💡 The Solution (C3 Level – 12 Marks)</span>
+                                <h3 style="margin-top: 1rem; font-size: 1.5rem; line-height: 1.4;">Application of Advanced Scalability &amp; Fault Tolerance Strategies</h3>
+                            </div>
+                            <p style="margin-top: 1rem; color: var(--text-muted); font-size: 1.05rem;">
+                                To resolve these complex bottlenecks and securely scale the system, the following advanced architectural and testing strategies must be applied:
+                            </p>
+                            
+                            <div style="margin-top: 2rem; display: flex; flex-direction: column; gap: 2rem;">
+                                <div style="padding-left: 1.5rem; border-left: 2px solid rgba(59, 130, 246, 0.3);">
+                                    <h4 style="color: #fff; font-size: 1.15rem; display: flex; align-items: flex-start; gap: 0.75rem;">
+                                        <span style="background: rgba(59, 130, 246, 0.2); color: var(--primary); border: 1px solid rgba(59,130,246,0.4); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold; flex-shrink: 0;">1</span>
+                                        Apply Hyper-Scalability Load Balancing Algorithms (3 Marks)
+                                    </h4>
+                                    <p style="margin-top: 1rem; color: var(--text-muted); line-height: 1.6;">To solve the load balancer bottleneck at massive scale, the system must replace JSQ with hyper-scalable dynamic algorithms like Power-of-d Choices or Join-the-Idle-Queue (JIQ). By applying JIQ, the routing paradigm is inverted so that idle servers proactively broadcast their availability to the load balancer. This eliminates the need for the balancer to constantly probe servers, achieving near-zero routing overhead and allowing the system to effortlessly handle massive traffic spikes.</p>
+                                </div>
+
+                                <div style="padding-left: 1.5rem; border-left: 2px solid rgba(59, 130, 246, 0.3);">
+                                    <h4 style="color: #fff; font-size: 1.15rem; display: flex; align-items: flex-start; gap: 0.75rem;">
+                                        <span style="background: rgba(59, 130, 246, 0.2); color: var(--primary); border: 1px solid rgba(59,130,246,0.4); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold; flex-shrink: 0;">2</span>
+                                        Implement Async Queues and Database Connection Pooling (3 Marks)
+                                    </h4>
+                                    <p style="margin-top: 1rem; color: var(--text-muted); line-height: 1.6;">To fix the database and thread exhaustion, the architecture must transition from synchronous processing to an asynchronous payment queue. By offloading payment processing to a non-blocking message queue, threads do not wait synchronously, instantly freeing up the CPU to handle other users. Additionally, implementing an optimized database connection pool eliminates the expensive overhead of establishing new connections per request, allowing the system to process high-volume queries smoothly without timing out.</p>
+                                </div>
+
+                                <div style="padding-left: 1.5rem; border-left: 2px solid rgba(59, 130, 246, 0.3);">
+                                    <h4 style="color: #fff; font-size: 1.15rem; display: flex; align-items: flex-start; gap: 0.75rem;">
+                                        <span style="background: rgba(59, 130, 246, 0.2); color: var(--primary); border: 1px solid rgba(59,130,246,0.4); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold; flex-shrink: 0;">3</span>
+                                        Apply Circuit Breakers and Event-Driven Resilience (3 Marks)
+                                    </h4>
+                                    <p style="margin-top: 1rem; color: var(--text-muted); line-height: 1.6;">To prevent the slow payment gateway from causing a cascading system collapse, architects must wrap the gateway in a Circuit Breaker. This allows the system to "fail fast" gracefully when the external provider degrades, protecting the overarching network. This must be paired with retry logic using exponential backoff and jitter, which ensures that temporary glitches are re-attempted with randomized delays, preventing synchronized retry floods from overwhelming recovering downstream services.</p>
+                                </div>
+
+                                <div style="padding-left: 1.5rem; border-left: 2px solid rgba(59, 130, 246, 0.3);">
+                                    <h4 style="color: #fff; font-size: 1.15rem; display: flex; align-items: flex-start; gap: 0.75rem;">
+                                        <span style="background: rgba(59, 130, 246, 0.2); color: var(--primary); border: 1px solid rgba(59,130,246,0.4); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold; flex-shrink: 0;">4</span>
+                                        Execute Full-Spectrum Performance Testing in CI/CD (3 Marks)
+                                    </h4>
+                                    <p style="margin-top: 1rem; color: var(--text-muted); line-height: 1.6;">To ensure hidden architectural flaws (like the memory leak) are caught before production, the engineering team must apply the full spectrum of testing by combining Load Testing (to validate baseline SLAs) with Stress Testing (to push the system past its breaking point and reveal hidden failures). Furthermore, these tests must be integrated directly into the CI/CD pipeline with automated alert gates. This guarantees that any code introducing performance degradation is automatically blocked from deployment.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Example 2: Exception Recovery -->
+                <div class="case-study-container" style="margin-bottom: 6rem;">
+                    <div class="bento-grid-12">
+                        <!-- Title and Problem -->
+                        <div class="bento-card-inner col-span-5" style="border-top: 4px solid var(--accent); background: linear-gradient(180deg, rgba(255, 77, 77, 0.05) 0%, transparent 100%);">
+                            <div class="card-header border-bottom">
+                                <span class="badge-sub" style="color: var(--accent); letter-spacing: 1px; font-weight: bold; text-transform: uppercase;">🔥 The Problem Scenario</span>
+                                <h3 style="margin-top: 1rem; font-size: 1.8rem; line-height: 1.3;">Exception Recovery: Distributed Financial System Meltdown</h3>
+                            </div>
+                            <p style="margin-top: 1rem; font-size: 1.05rem; line-height: 1.6; color: var(--text-main);">
+                                During a peak market trading event, a distributed financial clearing system attempts to process thousands of transactions per second. The system encounters a severe multi-layered failure due to a lack of proper exception handling:
+                            </p>
+                            <ul class="forensic-list" style="margin-top: 1.5rem;">
+                                <li>A third-party fraud detection API experiences extreme latency, causing technical timeouts. Because there is no fallback, these timeouts cascade, freezing the entire checkout workflow.</li>
+                                <li>A malformed transaction payload (a "poison message") enters the async event stream and repeatedly crashes the billing microservice every time it tries to process it.</li>
+                                <li>Several multi-step fund transfers fail midway through processing. Because there is no rollback mechanism, funds are deducted from user accounts but never credited to the merchants, resulting in severe data corruption and an inconsistent financial ledger.</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- The Solution -->
+                        <div class="bento-card-inner col-span-7" style="border-top: 4px solid var(--primary); background: linear-gradient(180deg, rgba(59, 130, 246, 0.05) 0%, transparent 100%);">
+                            <div class="card-header border-bottom">
+                                <span class="badge-sub" style="color: var(--primary); letter-spacing: 1px; font-weight: bold; text-transform: uppercase;">💡 The Solution (C3 Level – 12 Marks)</span>
+                                <h3 style="margin-top: 1rem; font-size: 1.5rem; line-height: 1.4;">Application of Exception Recovery Strategies</h3>
+                            </div>
+                            <p style="margin-top: 1rem; color: var(--text-muted); font-size: 1.05rem;">
+                                To recover from this catastrophic failure and architect a fault-tolerant system, we must apply the appropriate exception recovery strategies based on the specific failure types:
+                            </p>
+                            
+                            <div style="margin-top: 2rem; display: flex; flex-direction: column; gap: 2rem;">
+                                <div style="padding-left: 1.5rem; border-left: 2px solid rgba(59, 130, 246, 0.3);">
+                                    <h4 style="color: #fff; font-size: 1.15rem; display: flex; align-items: flex-start; gap: 0.75rem;">
+                                        <span style="background: rgba(59, 130, 246, 0.2); color: var(--primary); border: 1px solid rgba(59,130,246,0.4); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold; flex-shrink: 0;">1</span>
+                                        Apply Backward Recovery for Transactional Integrity (3 Marks)
+                                    </h4>
+                                    <p style="margin-top: 1rem; color: var(--text-muted); line-height: 1.6;">To fix the corrupted financial ledgers and partial fund transfers, you must apply Backward Recovery. This strategy safely retreats the system to a historically correct state using checkpoints. It is the most appropriate strategy for situations involving data corruption or strict financial consistency where partial commits cannot be tolerated. You must implement coordinated rollbacks (Recovery Regions) so that if an atomic transaction fails midway, all participating nodes (databases, APIs) discard the pending changes simultaneously, returning the ledger to a known-good state.</p>
+                                </div>
+
+                                <div style="padding-left: 1.5rem; border-left: 2px solid rgba(59, 130, 246, 0.3);">
+                                    <h4 style="color: #fff; font-size: 1.15rem; display: flex; align-items: flex-start; gap: 0.75rem;">
+                                        <span style="background: rgba(59, 130, 246, 0.2); color: var(--primary); border: 1px solid rgba(59,130,246,0.4); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold; flex-shrink: 0;">2</span>
+                                        Apply Forward Recovery for Real-Time Availability (3 Marks)
+                                    </h4>
+                                    <p style="margin-top: 1rem; color: var(--text-muted); line-height: 1.6;">To solve the freezing checkout workflow caused by the slow fraud detection API, you must apply Forward Recovery. Instead of rolling back, this strategy repairs the state on the fly using programmed fallback handlers to continue processing. This is highly appropriate for real-time event streams, high availability needs, and transient network drops. For example, you can program a fallback handler that temporarily bypasses the slow API for historically trusted users, ensuring continuous availability and minimal latency for the end-user without halting the transaction.</p>
+                                </div>
+
+                                <div style="padding-left: 1.5rem; border-left: 2px solid rgba(59, 130, 246, 0.3);">
+                                    <h4 style="color: #fff; font-size: 1.15rem; display: flex; align-items: flex-start; gap: 0.75rem;">
+                                        <span style="background: rgba(59, 130, 246, 0.2); color: var(--primary); border: 1px solid rgba(59,130,246,0.4); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold; flex-shrink: 0;">3</span>
+                                        Implement Event-Driven Retries and Circuit Breakers (3 Marks)
+                                    </h4>
+                                    <p style="margin-top: 1rem; color: var(--text-muted); line-height: 1.6;">To prevent the technical API timeouts from causing a cascading system collapse across the network, you must apply middleware-level interventions. First, implement a Circuit Breaker to detect the sustained failure and temporarily halt traffic to the failing fraud API, allowing it to fail fast gracefully. For transient glitches, apply Automated Retries with Exponential Backoff and Jitter. This adds expanding, randomized delays between retry attempts, preventing synchronized "retry storms" from overwhelming recovering downstream services.</p>
+                                </div>
+
+                                <div style="padding-left: 1.5rem; border-left: 2px solid rgba(59, 130, 246, 0.3);">
+                                    <h4 style="color: #fff; font-size: 1.15rem; display: flex; align-items: flex-start; gap: 0.75rem;">
+                                        <span style="background: rgba(59, 130, 246, 0.2); color: var(--primary); border: 1px solid rgba(59,130,246,0.4); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold; flex-shrink: 0;">4</span>
+                                        Deploy Dead-Letter Queues (DLQ) and Micro-Reboots (3 Marks)
+                                    </h4>
+                                    <p style="margin-top: 1rem; color: var(--text-muted); line-height: 1.6;">To resolve the crashing billing microservice, you must handle the malformed "poison message" using a Dead-Letter Queue (DLQ). This is the most appropriate strategy for asynchronous messages that fail all retry policies. The system will forcefully quarantine the malformed payload into the DLQ, isolating it so the primary event pipeline can continue processing healthy transactions. To recover the crashed billing service itself, apply a Surgical Micro-Reboot to instantly restart only the isolated failing component without shutting down the overarching application, drastically reducing user-facing downtime.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Example 3: Enterprise Architecture Styles -->
+                <div class="case-study-container" style="margin-bottom: 6rem;">
+                    <div class="bento-grid-12">
+                        <!-- Title and Problem -->
+                        <div class="bento-card-inner col-span-5" style="border-top: 4px solid var(--accent); background: linear-gradient(180deg, rgba(255, 77, 77, 0.05) 0%, transparent 100%);">
+                            <div class="card-header border-bottom">
+                                <span class="badge-sub" style="color: var(--accent); letter-spacing: 1px; font-weight: bold; text-transform: uppercase;">🔥 The Problem Scenario</span>
+                                <h3 style="margin-top: 1rem; font-size: 1.8rem; line-height: 1.3;">Architecture Styles: Bank X (JPMorgan Chase) Legacy Modernisation</h3>
+                            </div>
+                            <p style="margin-top: 1rem; font-size: 1.05rem; line-height: 1.6; color: var(--text-main);">
+                                Bank X operated on a legacy, centralized monolithic mainframe where all core banking interfaces were tightly coupled. Whenever they needed to integrate a new FinTech partner, it required bespoke, point-to-point connections, creating a highly rigid system. As digital banking demand grew, the monolith could not scale dynamically, lacked real-time observability, and relied on slow overnight batch jobs that were unsuited for modern, real-time digital ecosystems.
+                            </p>
+                            <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(0,0,0,0.5); border: 1px solid var(--panel-border); border-radius: var(--radius-md);">
+                                <h4 style="color: #fff; font-size: 1.1rem; margin-bottom: 0.5rem; font-family: var(--font-heading);">The Transformation</h4>
+                                <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;">To solve this, architects applied the Strangler Pattern to incrementally decompose the monolith, introducing an API Gateway and transitioning to a cloud-native Microservices and Event-Driven Architecture (using Kafka). This enabled real-time fraud scoring and flexible FinTech integration.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- The Solution -->
+                        <div class="bento-card-inner col-span-7" style="border-top: 4px solid var(--primary); background: linear-gradient(180deg, rgba(59, 130, 246, 0.05) 0%, transparent 100%);">
+                            <div class="card-header border-bottom">
+                                <span class="badge-sub" style="color: var(--primary); letter-spacing: 1px; font-weight: bold; text-transform: uppercase;">💡 The Solution (C3 Level – 12 Marks)</span>
+                                <h3 style="margin-top: 1rem; font-size: 1.5rem; line-height: 1.4;">Comparing Enterprise Architecture Styles</h3>
+                            </div>
+                            <p style="margin-top: 1rem; color: var(--text-muted); font-size: 1.05rem;">
+                                To design a resilient and modern digital ecosystem, an architect must evaluate and choose the appropriate enterprise architecture style based on specific integration capabilities, flexibility, and operational challenges.
+                            </p>
+                            
+                            <div style="margin-top: 2rem; display: flex; flex-direction: column; gap: 2rem;">
+                                <div style="padding-left: 1.5rem; border-left: 2px solid rgba(59, 130, 246, 0.3);">
+                                    <h4 style="color: #fff; font-size: 1.15rem; display: flex; align-items: flex-start; gap: 0.75rem;">
+                                        <span style="background: rgba(59, 130, 246, 0.2); color: var(--primary); border: 1px solid rgba(59,130,246,0.4); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold; flex-shrink: 0;">1</span>
+                                        Monolithic / Centralized Architecture (3 Marks)
+                                    </h4>
+                                    <ul class="forensic-list" style="margin-top: 1rem; font-size: 0.95rem;">
+                                        <li><em>Characteristics &amp; Integration:</em> This structural design consists of a single large application where all modules and business logic are tightly coupled together, running on a central server (e.g., legacy mainframes).</li>
+                                        <li><em>Flexibility &amp; Suitability:</em> While it is initially easy to manage and provides strong data consistency, it is highly rigid and poorly suited for modern digital ecosystems. Its primary challenge is that it acts as a single point of failure — if the central server crashes, the entire system goes down — and it is exceptionally difficult to scale horizontally.</li>
+                                    </ul>
+                                </div>
+
+                                <div style="padding-left: 1.5rem; border-left: 2px solid rgba(59, 130, 246, 0.3);">
+                                    <h4 style="color: #fff; font-size: 1.15rem; display: flex; align-items: flex-start; gap: 0.75rem;">
+                                        <span style="background: rgba(59, 130, 246, 0.2); color: var(--primary); border: 1px solid rgba(59,130,246,0.4); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold; flex-shrink: 0;">2</span>
+                                        Service-Oriented Architecture (SOA) &amp; ESB (3 Marks)
+                                    </h4>
+                                    <ul class="forensic-list" style="margin-top: 1rem; font-size: 0.95rem;">
+                                        <li><em>Characteristics &amp; Integration:</em> SOA breaks monolithic applications into reusable business services that communicate via standard XML-based interfaces (like SOAP/WSDL). Integration is usually handled by an Enterprise Service Bus (ESB), which acts as a centralized middleware hub to route, transform (e.g., XML to JSON), and orchestrate messages between heterogeneous applications.</li>
+                                        <li><em>Flexibility &amp; Suitability:</em> It is highly suitable for large enterprises (such as Hospital Information Systems) that need to securely integrate modern apps with legacy systems under centralized governance. However, the major challenge is that the centralized ESB can become a severe performance bottleneck under high traffic scale.</li>
+                                    </ul>
+                                </div>
+
+                                <div style="padding-left: 1.5rem; border-left: 2px solid rgba(59, 130, 246, 0.3);">
+                                    <h4 style="color: #fff; font-size: 1.15rem; display: flex; align-items: flex-start; gap: 0.75rem;">
+                                        <span style="background: rgba(59, 130, 246, 0.2); color: var(--primary); border: 1px solid rgba(59,130,246,0.4); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold; flex-shrink: 0;">3</span>
+                                        Microservices Architecture (3 Marks)
+                                    </h4>
+                                    <ul class="forensic-list" style="margin-top: 1rem; font-size: 0.95rem;">
+                                        <li><em>Characteristics &amp; Integration:</em> This style completely decentralizes the system by decomposing it into tiny, independent services that communicate via lightweight APIs (REST or gRPC). It enforces extreme loose coupling because each service owns its own codebase, deployment pipeline, and database, ensuring there is zero shared state.</li>
+                                        <li><em>Flexibility &amp; Suitability:</em> It is the industry standard for cloud-native greenfield systems because it offers massive flexibility, allowing teams to scale and update individual services independently without affecting the rest of the application. The main challenge an architect must solve is the high complexity of service orchestration and cross-domain network debugging.</li>
+                                    </ul>
+                                </div>
+
+                                <div style="padding-left: 1.5rem; border-left: 2px solid rgba(59, 130, 246, 0.3);">
+                                    <h4 style="color: #fff; font-size: 1.15rem; display: flex; align-items: flex-start; gap: 0.75rem;">
+                                        <span style="background: rgba(59, 130, 246, 0.2); color: var(--primary); border: 1px solid rgba(59,130,246,0.4); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold; flex-shrink: 0;">4</span>
+                                        Event-Driven Architecture (EDA) (3 Marks)
+                                    </h4>
+                                    <ul class="forensic-list" style="margin-top: 1rem; font-size: 0.95rem;">
+                                        <li><em>Characteristics &amp; Integration:</em> In EDA, services do not call each other directly or wait synchronously. Instead, event producers broadcast messages to an asynchronous queue or broker (like Kafka or RabbitMQ), and consumers process them independently at their own pace.</li>
+                                        <li><em>Flexibility &amp; Suitability:</em> This style is perfect for real-time, high-volume ecosystems (such as Shopee's e-commerce order pipelines) because it enables true system decoupling and massive horizontal scalability. The primary challenge is that asynchronous event chains can be exceptionally difficult to trace and debug when a failure occurs.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Example 4: Load Testing Approaches & Virtual Users -->
+                <div class="case-study-container" style="margin-bottom: 2rem;">
+                    <div class="bento-grid-12">
+                        <!-- Title and Problem -->
+                        <div class="bento-card-inner col-span-5" style="border-top: 4px solid var(--accent); background: linear-gradient(180deg, rgba(255, 77, 77, 0.05) 0%, transparent 100%);">
+                            <div class="card-header border-bottom">
+                                <span class="badge-sub" style="color: var(--accent); letter-spacing: 1px; font-weight: bold; text-transform: uppercase;">🔥 The Problem Scenario</span>
+                                <h3 style="margin-top: 1rem; font-size: 1.8rem; line-height: 1.3;">Load Testing: The False Bottleneck in Load Generation</h3>
+                            </div>
+                            <p style="margin-top: 1rem; font-size: 1.05rem; line-height: 1.6; color: var(--text-main);">
+                                An engineering team was tasked with stress-testing a new cloud-native e-commerce API to prepare for a massive Black Friday event. They needed to simulate 10,000 concurrent virtual users. They deployed a traditional load testing tool (like Apache JMeter) on a single commodity testing machine. During the test, the system appeared to crash at just 2,000 users. However, diagnostics revealed that the target API was perfectly healthy; instead, the load generator itself had collapsed. Because the tool used an OS-level thread for every virtual user, the testing machine completely exhausted its RAM, and its CPU was paralyzed by context-switching overhead. The team had to halt the test, initially misdiagnosing the failure as an application bug.
+                            </p>
+                        </div>
+                        
+                        <!-- The Solution -->
+                        <div class="bento-card-inner col-span-7" style="border-top: 4px solid var(--primary); background: linear-gradient(180deg, rgba(59, 130, 246, 0.05) 0%, transparent 100%);">
+                            <div class="card-header border-bottom">
+                                <span class="badge-sub" style="color: var(--primary); letter-spacing: 1px; font-weight: bold; text-transform: uppercase;">💡 The Solution (C3 Level – 12 Marks)</span>
+                                <h3 style="margin-top: 1rem; font-size: 1.5rem; line-height: 1.4;">Load Testing Approaches and Resource Consumption</h3>
+                            </div>
+                            <p style="margin-top: 1rem; color: var(--text-muted); font-size: 1.05rem;">
+                                To accurately benchmark scalable enterprise targets without crashing the testing infrastructure, an engineer must select load testing tools based on their underlying concurrency models and resource consumption.
+                            </p>
+                            
+                            <div style="margin-top: 2rem; display: flex; flex-direction: column; gap: 2rem;">
+                                <div style="padding-left: 1.5rem; border-left: 2px solid rgba(59, 130, 246, 0.3);">
+                                    <h4 style="color: #fff; font-size: 1.15rem; display: flex; align-items: flex-start; gap: 0.75rem;">
+                                        <span style="background: rgba(59, 130, 246, 0.2); color: var(--primary); border: 1px solid rgba(59,130,246,0.4); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold; flex-shrink: 0;">1</span>
+                                        Analyse the Thread-Per-User Model Constraints (3 Marks)
+                                    </h4>
+                                    <p style="margin-top: 1rem; color: var(--text-muted); line-height: 1.6;">Traditional load testing tools (like LoadRunner or JMeter) simulate each virtual user by mapping them to a dedicated OS-level thread. This approach consumes massive resources, as each OS thread requires approximately 1 to 8 MB of stack memory. Consequently, simulating thousands of users creates a massive memory footprint and forces the CPU into heavy, continuous context-switching. This strictly limits the number of concurrent users a single machine can generate before the testing infrastructure itself becomes the bottleneck.</p>
+                                </div>
+
+                                <div style="padding-left: 1.5rem; border-left: 2px solid rgba(59, 130, 246, 0.3);">
+                                    <h4 style="color: #fff; font-size: 1.15rem; display: flex; align-items: flex-start; gap: 0.75rem;">
+                                        <span style="background: rgba(59, 130, 246, 0.2); color: var(--primary); border: 1px solid rgba(59,130,246,0.4); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold; flex-shrink: 0;">2</span>
+                                        Apply the Asynchronous (Event-Loop) Model (3 Marks)
+                                    </h4>
+                                    <p style="margin-top: 1rem; color: var(--text-muted); line-height: 1.6;">To overcome resource exhaustion, modern load testing tools (such as k6, Gatling, Locust, and HULK) generate virtual users using an asynchronous, event-driven model. Instead of heavy OS threads, these tools simulate users using lightweight coroutines or greenlets. Because a coroutine only requires a few kilobytes of memory, the overall memory footprint is drastically reduced, allowing the simulation of vastly more users on the same hardware.</p>
+                                </div>
+
+                                <div style="padding-left: 1.5rem; border-left: 2px solid rgba(59, 130, 246, 0.3);">
+                                    <h4 style="color: #fff; font-size: 1.15rem; display: flex; align-items: flex-start; gap: 0.75rem;">
+                                        <span style="background: rgba(59, 130, 246, 0.2); color: var(--primary); border: 1px solid rgba(59,130,246,0.4); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold; flex-shrink: 0;">3</span>
+                                        Eliminate CPU Context-Switching via Non-Blocking I/O (3 Marks)
+                                    </h4>
+                                    <p style="margin-top: 1rem; color: var(--text-muted); line-height: 1.6;">The async model leverages non-blocking I/O and cooperative scheduling. In this architecture, the CPU does not waste processing power constantly switching between thousands of active threads. Instead, a single-thread dispatcher runs an event loop that only yields when waiting for an I/O operation (like a network response). When a virtual user's task is blocked waiting for an I/O response, it instantly deregisters from the event loop, immediately freeing system resources for other active users.</p>
+                                </div>
+
+                                <div style="padding-left: 1.5rem; border-left: 2px solid rgba(59, 130, 246, 0.3);">
+                                    <h4 style="color: #fff; font-size: 1.15rem; display: flex; align-items: flex-start; gap: 0.75rem;">
+                                        <span style="background: rgba(59, 130, 246, 0.2); color: var(--primary); border: 1px solid rgba(59,130,246,0.4); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold; flex-shrink: 0;">4</span>
+                                        Achieve Linear Scale-Out for Enterprise Benchmarking (3 Marks)
+                                    </h4>
+                                    <p style="margin-top: 1rem; color: var(--text-muted); line-height: 1.6;">By applying this asynchronous paradigm, the testing infrastructure becomes highly efficient and "CPU-light." This extreme resource efficiency allows a single commodity machine to easily simulate 10,000+ concurrent virtual users — roughly 100 to 1000 times more users than thread-based models. This enables true linear scale-out, allowing engineers to reliably stress test modern microservices and high-throughput APIs without needing a massive cluster of load-generating servers.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
