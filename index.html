@@ -91,7 +91,12 @@
                     <summary style="font-size: 0.9rem; color: #fff; border-bottom: 1px solid var(--panel-border); padding-bottom: 0.5rem; margin-top: 0.5rem;">4. Object Oriented Programming</summary>
                     <div style="padding-left: 1rem; border-left: 1px solid #333; margin-left: 0.5rem; padding-bottom: 1rem;">
                         <ul class="nav-links" style="margin-top: 0.5rem;">
-                            <li><button class="nav-btn" data-target="coming-soon"><em>Coming soon...</em></button></li>
+                            <li><button class="nav-btn" data-target="oop-q1">Question 1</button></li>
+                            <li><button class="nav-btn" data-target="oop-q2">Question 2</button></li>
+                            <li><button class="nav-btn" data-target="oop-q3">Question 3</button></li>
+                            <li><button class="nav-btn" data-target="oop-q4">Question 4</button></li>
+                            <li><button class="nav-btn" data-target="oop-q5">Question 5</button></li>
+                            <li><button class="nav-btn" data-target="oop-topics">Important Topics</button></li>
                         </ul>
                     </div>
                 </details>
@@ -1833,6 +1838,437 @@ EV_tv = 0.3(900,000) + 0.6(900,000) + 0.1(900,000)
                             <h3>The Middleware Reality</h3>
                         </div>
                         <p>In Serverless, <strong>the cloud provider IS the middleware</strong>. Developers don't install or manage Kafka or Nginx; they use fully managed services (like AWS EventBridge, SQS, or SNS) to route data between functions. The middleware handles 100% of the scaling, load balancing, and networking, allowing developers to focus purely on business logic.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- OOP Sections -->
+            <section id="oop-q1" class="module-section new-layout">
+                <div class="section-header">
+                    <h2 class="gradient-text">Question 1 — StopWatch</h2>
+                </div>
+                <div class="bento-grid-12">
+                    <div class="bento-card-inner premium-card col-span-12">
+                        <div class="card-header border-bottom"><h3>UML Diagram</h3></div>
+                        <div class="code-window">
+                            <div class="code-header">
+                                <div class="mac-dots">
+                                    <div class="mac-dot close"></div><div class="mac-dot minimize"></div><div class="mac-dot maximize"></div>
+                                </div>
+                                <span class="code-title">StopWatch.uml</span>
+                            </div>
+                            <div class="code-content">
+                                <pre><code>StopWatch
+- startTime: long
+- endTime: long
++ StopWatch()
++ getStartTime(): long
++ getEndTime(): long
++ start(): void
++ stop(): void
++ getElapsedTime(): long</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bento-card-inner premium-card col-span-6">
+                        <div class="card-header border-bottom"><h3>StopWatch Class</h3></div>
+                        <div class="code-window">
+                            <div class="code-header">
+                                <div class="mac-dots">
+                                    <div class="mac-dot close"></div><div class="mac-dot minimize"></div><div class="mac-dot maximize"></div>
+                                </div>
+                                <span class="code-title">StopWatch.java</span>
+                            </div>
+                            <div class="code-content">
+                                <pre><code class="language-java">public class StopWatch {
+    private long startTime;
+    private long endTime;
+
+    public StopWatch() {
+        startTime = System.currentTimeMillis();
+    }
+
+    public long getStartTime(){ return startTime; }
+    public long getEndTime(){ return endTime; }
+
+    public void start(){
+        startTime = System.currentTimeMillis();
+    }
+
+    public void stop(){
+        endTime = System.currentTimeMillis();
+    }
+
+    public long getElapsedTime(){
+        return endTime - startTime;
+    }
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bento-card-inner premium-card col-span-6">
+                        <div class="card-header border-bottom"><h3>Selection Sort</h3></div>
+                        <div class="code-window">
+                            <div class="code-header">
+                                <div class="mac-dots">
+                                    <div class="mac-dot close"></div><div class="mac-dot minimize"></div><div class="mac-dot maximize"></div>
+                                </div>
+                                <span class="code-title">Sorting.java</span>
+                            </div>
+                            <div class="code-content">
+                                <pre><code class="language-java">public static void selectionSort(int[] list){
+    for(int i=0;i&lt;list.length-1;i++){
+        int min=i;
+        for(int j=i+1;j&lt;list.length;j++){
+            if(list[j]&lt;list[min]) min=j;
+        }
+        int temp=list[min];
+        list[min]=list[i];
+        list[i]=temp;
+    }
+}</code></pre>
+                            </div>
+                        </div>
+                        <p class="elegant-text">Driver: Create 100000 random integers, call <code>start()</code>, perform <code>selectionSort()</code>, call <code>stop()</code>, then print <code>getElapsedTime()</code>.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="oop-q2" class="module-section new-layout">
+                <div class="section-header">
+                    <h2 class="gradient-text">Question 2 — Location</h2>
+                </div>
+                <div class="bento-grid-12">
+                    <div class="bento-card-inner premium-card col-span-12">
+                        <div class="card-header border-bottom"><h3>UML Diagram</h3></div>
+                        <div class="code-window">
+                            <div class="code-header">
+                                <div class="mac-dots">
+                                    <div class="mac-dot close"></div><div class="mac-dot minimize"></div><div class="mac-dot maximize"></div>
+                                </div>
+                                <span class="code-title">Location.uml</span>
+                            </div>
+                            <div class="code-content">
+                                <pre><code>Location
++ row:int
++ column:int
++ maxValue:double
++ locateLargest(double[][]):Location</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bento-card-inner premium-card col-span-6">
+                        <div class="card-header border-bottom"><h3>Location Class</h3></div>
+                        <div class="code-window">
+                            <div class="code-header">
+                                <div class="mac-dots">
+                                    <div class="mac-dot close"></div><div class="mac-dot minimize"></div><div class="mac-dot maximize"></div>
+                                </div>
+                                <span class="code-title">Location.java</span>
+                            </div>
+                            <div class="code-content">
+                                <pre><code class="language-java">public class Location {
+
+    public int row;
+    public int column;
+    public double maxValue;
+
+    public Location(){}
+
+    public static Location locateLargest(double[][] a){
+
+        Location loc = new Location();
+
+        loc.maxValue = a[0][0];
+        loc.row = 0;
+        loc.column = 0;
+
+        for(int i=0;i&lt;a.length;i++){
+            for(int j=0;j&lt;a[i].length;j++){
+                if(a[i][j] &gt; loc.maxValue){
+                    loc.maxValue = a[i][j];
+                    loc.row = i;
+                    loc.column = j;
+                }
+            }
+        }
+
+        return loc;
+    }
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bento-card-inner premium-card col-span-6">
+                        <div class="card-header border-bottom"><h3>Test Program</h3></div>
+                        <div class="code-window">
+                            <div class="code-header">
+                                <div class="mac-dots">
+                                    <div class="mac-dot close"></div><div class="mac-dot minimize"></div><div class="mac-dot maximize"></div>
+                                </div>
+                                <span class="code-title">TestLocation.java</span>
+                            </div>
+                            <div class="code-content">
+                                <pre><code class="language-java">import java.util.Scanner;
+
+public class TestLocation {
+
+    public static void main(String[] args){
+
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("Enter number of rows: ");
+        int rows = input.nextInt();
+
+        System.out.print("Enter number of columns: ");
+        int cols = input.nextInt();
+
+        double[][] array = new double[rows][cols];
+
+        System.out.println("Enter the array:");
+
+        for(int i=0;i&lt;rows;i++){
+            for(int j=0;j&lt;cols;j++){
+                array[i][j]=input.nextDouble();
+            }
+        }
+
+        Location largest = Location.locateLargest(array);
+
+        System.out.println("Largest Value : " + largest.maxValue);
+        System.out.println("Row : " + largest.row);
+        System.out.println("Column : " + largest.column);
+    }
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="oop-q3" class="module-section new-layout">
+                <div class="section-header">
+                    <h2 class="gradient-text">Question 3 — Account</h2>
+                </div>
+                <div class="bento-grid-12">
+                    <div class="bento-card-inner premium-card col-span-12">
+                        <div class="card-header border-bottom"><h3>UML Diagram</h3></div>
+                        <div class="code-window">
+                            <div class="code-header">
+                                <div class="mac-dots">
+                                    <div class="mac-dot close"></div><div class="mac-dot minimize"></div><div class="mac-dot maximize"></div>
+                                </div>
+                                <span class="code-title">Account.uml</span>
+                            </div>
+                            <div class="code-content">
+                                <pre><code>Account
+- accountNo:String
+- name:String
+- balance:double
++ checkBalance()
++ withdraw(double)</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bento-card-inner premium-card col-span-6">
+                        <div class="card-header border-bottom"><h3>checkBalance()</h3></div>
+                        <div class="code-window">
+                            <div class="code-header">
+                                <div class="mac-dots">
+                                    <div class="mac-dot close"></div><div class="mac-dot minimize"></div><div class="mac-dot maximize"></div>
+                                </div>
+                                <span class="code-title">Account.java</span>
+                            </div>
+                            <div class="code-content">
+                                <pre><code class="language-java">public void checkBalance(){
+    System.out.println("Balance = RM"+balance);
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bento-card-inner premium-card col-span-6">
+                        <div class="card-header border-bottom"><h3>withdraw()</h3></div>
+                        <div class="code-window">
+                            <div class="code-header">
+                                <div class="mac-dots">
+                                    <div class="mac-dot close"></div><div class="mac-dot minimize"></div><div class="mac-dot maximize"></div>
+                                </div>
+                                <span class="code-title">Account.java</span>
+                            </div>
+                            <div class="code-content">
+                                <pre><code class="language-java">public void withdraw(double amount){
+    if(amount&lt;10)
+        System.out.println("Minimum withdrawal is RM10.");
+    else if(balance-amount&lt;20)
+        System.out.println("Insufficient balance.");
+    else{
+        balance-=amount;
+        System.out.println("Withdrawal successful.");
+        System.out.println("Balance = RM"+balance);
+    }
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bento-card-inner premium-card col-span-12">
+                        <div class="card-header border-bottom"><h3>2×2 Array Setup</h3></div>
+                        <div class="code-window">
+                            <div class="code-header">
+                                <div class="mac-dots">
+                                    <div class="mac-dot close"></div><div class="mac-dot minimize"></div><div class="mac-dot maximize"></div>
+                                </div>
+                                <span class="code-title">Main.java</span>
+                            </div>
+                            <div class="code-content">
+                                <pre><code class="language-java">String[][] customer = new String[2][2];</code></pre>
+                            </div>
+                        </div>
+                        <p class="elegant-text">Use one loop to input account number and customer name, another loop to display both values.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="oop-q4" class="module-section new-layout">
+                <div class="section-header">
+                    <h2 class="gradient-text">Question 4 — Inheritance</h2>
+                </div>
+                <div class="bento-grid-12">
+                    <div class="bento-card-inner premium-card col-span-6">
+                        <div class="card-header border-bottom"><h3>Hierarchy</h3></div>
+                        <div class="code-window">
+                            <div class="code-header">
+                                <div class="mac-dots">
+                                    <div class="mac-dot close"></div><div class="mac-dot minimize"></div><div class="mac-dot maximize"></div>
+                                </div>
+                                <span class="code-title">Tree</span>
+                            </div>
+                            <div class="code-content">
+                                <pre><code>Person
+ ├── Student
+ └── Employee
+      ├── Faculty
+      └── Staff</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bento-card-inner premium-card col-span-6">
+                        <div class="card-header border-bottom"><h3>Fields &amp; Constants</h3></div>
+                        <ul class="forensic-list" style="margin-top: 1rem;">
+                            <li><strong>Person</strong> Fields: <code>name</code>, <code>address</code>, <code>phone</code>, <code>email</code></li>
+                            <li><strong>Student</strong> Constants: <code>FRESHMAN</code>, <code>SOPHOMORE</code>, <code>JUNIOR</code>, <code>SENIOR</code></li>
+                            <li><strong>Employee</strong> Fields: <code>office</code>, <code>salary</code>, <code>dateHired</code></li>
+                            <li><strong>Faculty</strong> Fields: <code>officeHours</code>, <code>rank</code></li>
+                            <li><strong>Staff</strong> Field: <code>title</code></li>
+                        </ul>
+                        <p class="elegant-text">Main program: Create one object each of Person, Student, Employee, Faculty and Staff, then display them.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="oop-q5" class="module-section new-layout">
+                <div class="section-header">
+                    <h2 class="gradient-text">Question 5 — Circle &amp; Cylinder</h2>
+                </div>
+                <div class="bento-grid-12">
+                    <div class="bento-card-inner premium-card col-span-12">
+                        <div class="card-header border-bottom"><h3>UML Diagram</h3></div>
+                        <div class="code-window">
+                            <div class="code-header">
+                                <div class="mac-dots">
+                                    <div class="mac-dot close"></div><div class="mac-dot minimize"></div><div class="mac-dot maximize"></div>
+                                </div>
+                                <span class="code-title">Shapes.uml</span>
+                            </div>
+                            <div class="code-content">
+                                <pre><code>Circle
+# radius
+# PI
++ getArea()
+
+      ▲
+      |
+Cylinder
+- height
++ getVolume()</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bento-card-inner premium-card col-span-6">
+                        <div class="card-header border-bottom"><h3>Cylinder Class</h3></div>
+                        <div class="code-window">
+                            <div class="code-header">
+                                <div class="mac-dots">
+                                    <div class="mac-dot close"></div><div class="mac-dot minimize"></div><div class="mac-dot maximize"></div>
+                                </div>
+                                <span class="code-title">Cylinder.java</span>
+                            </div>
+                            <div class="code-content">
+                                <pre><code class="language-java">public class Cylinder extends Circle {
+
+    private double height;
+
+    public Cylinder(double radius,double height){
+        super(radius);
+        this.height=height;
+    }
+
+    public double getVolume(){
+        return PI*radius*radius*height;
+    }
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bento-card-inner premium-card col-span-6">
+                        <div class="card-header border-bottom"><h3>Main Execution</h3></div>
+                        <div class="code-window">
+                            <div class="code-header">
+                                <div class="mac-dots">
+                                    <div class="mac-dot close"></div><div class="mac-dot minimize"></div><div class="mac-dot maximize"></div>
+                                </div>
+                                <span class="code-title">Main.java</span>
+                            </div>
+                            <div class="code-content">
+                                <pre><code class="language-java">Circle c = new Circle(4);
+Cylinder cy = new Cylinder(4, 5);
+
+System.out.println(c.getArea());
+System.out.println(cy.getVolume());</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="oop-topics" class="module-section new-layout">
+                <div class="section-header">
+                    <h2 class="gradient-text">Important Topics</h2>
+                    <p>A quick checklist of core Object-Oriented Programming concepts to revise.</p>
+                </div>
+                <div class="bento-grid-12">
+                    <div class="bento-card-inner premium-card col-span-12">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                            <ul class="forensic-list">
+                                <li>Classes &amp; Objects</li>
+                                <li>UML Design</li>
+                                <li>Constructors</li>
+                                <li>Encapsulation</li>
+                                <li>Inheritance</li>
+                            </ul>
+                            <ul class="forensic-list">
+                                <li><code>extends</code> keyword</li>
+                                <li><code>super()</code> keyword</li>
+                                <li>Method Overriding</li>
+                                <li>Arrays &amp; 2D Arrays</li>
+                                <li>Static Methods</li>
+                            </ul>
+                            <ul class="forensic-list">
+                                <li>Selection Sort</li>
+                                <li><code>System.currentTimeMillis()</code></li>
+                                <li>Constants (<code>final</code>)</li>
+                                <li>Static Final Fields</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </section>
